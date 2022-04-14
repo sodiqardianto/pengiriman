@@ -61,7 +61,8 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    // 'home' => RouteServiceProvider::HOME,
+    'dashboard' => RouteServiceProvider::DASHBOARD,
 
     /*
     |--------------------------------------------------------------------------
