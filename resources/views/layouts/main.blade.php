@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
     <meta name="author" content="Spruko Technologies Private Limited">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords"
         content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
 
@@ -27,6 +28,9 @@
     <link href="{{ asset('/assets/css/dark-style.css') }}" rel="stylesheet" />
     <link href="{{ asset('/assets/css/transparent-style.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/css/skin-modes.css') }}" rel="stylesheet" />
+
+    {{-- toastr --}}
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <!--- FONT-ICONS CSS -->
     <link href="{{ asset('/assets/css/icons.css') }}" rel="stylesheet" />
@@ -91,13 +95,30 @@
     <!-- SIDEBAR JS -->
     <script src="{{ asset('/assets/plugins/sidebar/sidebar.js') }}"></script>
 
+    <!-- SWEET-ALERT JS -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- INTERNAL SELECT2 JS -->
     <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
 
-    <!-- INTERNAL Data tables js-->
+    <!-- DATA TABLE JS-->
     <script src="{{ asset('/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/buttons.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/datatable/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('/assets/plugins/datatable/responsive.bootstrap5.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/table-data.js') }}"></script>
+
+    {{-- TOASTR --}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <!-- SIDE-MENU JS-->
     <script src="{{ asset('/assets/plugins/sidemenu/sidemenu.js') }}"></script>
@@ -105,12 +126,24 @@
     <!-- INTERNAL INDEX JS -->
     <script src="{{ asset('/assets/js/index1.js') }}"></script>
 
+    {{-- toastr --}}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     <!-- Color Theme js -->
     <script src="{{ asset('/assets/js/themeColors.js') }}"></script>
 
     <!-- CUSTOM JS -->
     <script src="{{ asset('/assets/js/custom.js') }}"></script>
     @stack('after-script')
+
+    <script>
+        //message with toastr
+        @if(session()->has('success'))
+        toastr.success('{{ session('success') }}', 'BERHASIL!');
+        @elseif(session()->has('error'))
+        toastr.error('{{ session('error') }}');
+        @endif
+    </script>
     
 </body>
 

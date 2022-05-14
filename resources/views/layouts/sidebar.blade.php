@@ -23,9 +23,24 @@
                     <h3>Main</h3>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="/dashboard"><i
+                    <a class="side-menu__item @if (Request::segment(1) == 'dashboard') active @endif" data-bs-toggle="slide" href="/dashboard"><i
                             class="side-menu__icon fe fe-home"></i><span
-                            class="side-menu__label">Dashboard</span></a>
+                            class="side-menu__label active">Dashboard</span></a>
+                </li>
+                <li class="sub-category">
+                    <h3>Management</h3>
+                </li>
+                <li class="slide">
+                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                            class="side-menu__icon fe fe-slack"></i><span
+                            class="side-menu__label">Management</span><i
+                            class="angle fe fe-chevron-right"></i></a>
+                    <ul class="slide-menu">
+                        <li class="side-menu-label1"><a href="javascript:void(0)">Management</a></li>
+                        <li><a href="{{ 'role' }}" class="slide-item"> Role Management</a></li>
+                        <li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
+                        <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li>
+                    </ul>
                 </li>
                 <li class="sub-category">
                     <h3>UI Kit</h3>

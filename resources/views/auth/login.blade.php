@@ -81,7 +81,7 @@
                                                 <div class="form-row">
                                                     <div class="col-xl-12 mb-3">
                                                         <label><b>Email</b></label>
-                                                        <input type="email" name="email" class="form-control @error('email') is-invalid state-invalid @enderror" placeholder="Input Email" autofocus required>
+                                                        <input type="email" name="email" class="form-control @error('email') is-invalid state-invalid @enderror" placeholder="Input Email" value="{{ old('email') }}" autofocus required>
                                                         @error('email')
                                                             <div class="invalid-feedback">{{ $message }}</div>
                                                         @enderror
