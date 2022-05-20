@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label class="form-label"> Select2 with search box</label>
-                            <select class="form-control select2-show-search form-select select2-hidden-accessible" data-placeholder="Choose one" tabindex="-1" aria-hidden="true">
+                            <select class="form-control select2-show-search form-select" data-placeholder="Choose one">
                                     <option label="Choose one"></option>
                                     <option value="AZ">Arizona</option>
                                     <option value="CO">Colorado</option>
@@ -52,7 +52,7 @@
                                     <option value="TX">Texas</option>
                                     <option value="TN">Tennessee</option>
                                     <option value="WI">Wisconsin</option>
-                                </select><span class="select2 select2-container select2-container--default select2-container--above select2-container--open" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="true" tabindex="0" aria-labelledby="select2-zu74-container" aria-owns="select2-zu74-results" aria-activedescendant="select2-zu74-result-4cws-ND"><span class="select2-selection__rendered" id="select2-zu74-container"><span class="select2-selection__placeholder">Choose one</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </select>
                         </div>
                         <label for="inputName" class="col-md-3 form-label">Nama Zona</label>
                         <div class="col-md-9">
@@ -110,3 +110,9 @@
     </div>
 </div>
 @endsection
+
+@push('after-script')
+    <!-- INTERNAL SELECT2 JS -->
+    <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/select2.js') }}"></script>
+@endpush

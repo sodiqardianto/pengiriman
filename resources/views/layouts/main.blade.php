@@ -99,10 +99,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/select2.js') }}"></script>
-
     <!-- DATA TABLE JS-->
     <script src="{{ asset('/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('/assets/plugins/datatable/js/dataTables.bootstrap5.js') }}"></script>
