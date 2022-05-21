@@ -133,10 +133,10 @@ class ZonaController extends Controller
 
         if ($delete == 1) {
             $success = true;
-            $message = "User deleted successfully";
+            $message = "Zona deleted successfully";
         } else {
             $success = true;
-            $message = "User not found";
+            $message = "Zona not found";
         }
 
         //  return response

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Zona;
 use Illuminate\Http\Request;
 
 class CityController extends Controller
@@ -25,7 +26,8 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('city.create');
+        $zona = Zona::all();
+        return view('city.create',compact('zona'));
     }
 
     /**
@@ -37,29 +39,25 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate(
-            [
+            [   
+                'kota'=>'required',
                 'zona'  =>  'required',
-                'harga25'=>'required',
-                'harga50'=>'required',
-                'harga75'=>'required',
-                'ket'=>'required'
+                'km'=>'required'
             ]
         );
 
         $input = City::create([
-            'zona'  =>  strtolower($request->zona),
-            'harga25'=>$request->harga25,
-            'harga50'=>$request->harga50,
-            'harga75'=>$request->harga75,
-            'ket'=>$request->ket
+            'kota'=>strtolower($request->kota),
+            'zona_id'  =>  strtolower($request->zona),
+            'km'=>$request->km
         ]);
 
         if ($input) {
             //redirect dengan pesan sukses
-            return redirect()->route('zona')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('city')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('createZona')->with(['error' => 'Data Gagal Disimpan!']);
+            return redirect()->route('createCity')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
@@ -82,7 +80,8 @@ class CityController extends Controller
      */
     public function edit(City $city)
     {
-        //
+        $zona=Zona::all();
+        return view('city.edit', compact('city','zona'));
     }
 
     /**
@@ -92,9 +91,29 @@ class CityController extends Controller
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate(
+            [   
+                'kota'=>'required',
+                'zona'  =>  'required',
+                'km'=>'required'
+            ]
+        );
+
+        $input = City::find($id)->update([
+            'kota'=>strtolower($request->kota),
+            'zona_id'  =>  strtolower($request->zona),
+            'km'=>$request->km
+        ]);
+
+        if ($input) {
+            //redirect dengan pesan sukses
+            return redirect()->route('city')->with(['success' => 'Data Berhasil Diubah!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('editCity')->with(['error' => 'Data Gagal Diubah!']);
+        }
     }
 
     /**
@@ -103,8 +122,28 @@ class CityController extends Controller
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function destroy(City $city)
+    public function destroy($id)
     {
-        //
+        $delete = City::destroy($id);
+
+        if ($delete == 1) {
+            $success = true;
+            $message = "City deleted successfully";
+        } else {
+            $success = true;
+            $message = "City not found";
+        }
+
+        //  return response
+        return response()->json([
+            'success' => $success,
+            'message' => $message,
+        ]);
+    }
+
+    public function price(Request $request)
+    {
+        $p = Zona::where('id', $request->id)->first();
+        return response()->json($p);
     }
 }

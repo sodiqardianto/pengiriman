@@ -42,7 +42,7 @@
                                 <td>{{ ucwords($item->kota) }}</td>
                                 <td>{{ $item->km }}</td>
                                 <td>
-                                    <a href="{{ route('editZona', $item->id) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('editCity', $item->id) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
                                     <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
@@ -81,7 +81,7 @@
                         if (results.success === true) {
                             Swal.fire(
                                 'Deleted!',
-                                'Role berhasil dihapus.',
+                                'Kota berhasil dihapus.',
                                 'success'
                             )
                             // refresh page after 2 seconds

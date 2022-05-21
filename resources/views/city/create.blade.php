@@ -22,50 +22,33 @@
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('storeCity') }}" method="POST">
                     @csrf
-                    <div class=" row mb-2">
-
-                        <div class="form-group">
-                            <label class="form-label"> Select2 with search box</label>
-                            <select class="form-control select2-show-search form-select" data-placeholder="Choose one">
-                                    <option label="Choose one"></option>
-                                    <option value="AZ">Arizona</option>
-                                    <option value="CO">Colorado</option>
-                                    <option value="ID">Idaho</option>
-                                    <option value="MT">Montana</option>
-                                    <option value="NE">Nebraska</option>
-                                    <option value="NM">New Mexico</option>
-                                    <option value="ND">North Dakota</option>
-                                    <option value="UT">Utah</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="AL">Alabama</option>
-                                    <option value="AR">Arkansas</option>
-                                    <option value="IL">Illinois</option>
-                                    <option value="IA">Iowa</option>
-                                    <option value="KS">Kansas</option>
-                                    <option value="KY">Kentucky</option>
-                                    <option value="LA">Louisiana</option>
-                                    <option value="MN">Minnesota</option>
-                                    <option value="MS">Mississippi</option>
-                                    <option value="MO">Missouri</option>
-                                    <option value="OK">Oklahoma</option>
-                                    <option value="SD">South Dakota</option>
-                                    <option value="TX">Texas</option>
-                                    <option value="TN">Tennessee</option>
-                                    <option value="WI">Wisconsin</option>
-                                </select>
-                        </div>
-                        <label for="inputName" class="col-md-3 form-label">Nama Zona</label>
+                    <div class="row mb-2">
+                        <label for="kota" class="col-md-3 form-label">Nama Kota</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('name') is-invalid state-invalid @enderror" id="inputName" name="zona" placeholder="Nama Zona" value="{{ old('zona') }}">
-                            @error('name')
+                            <input type="text" class="form-control @error('kota') is-invalid state-invalid @enderror" id="kota" name="kota" placeholder="Masukan Nama Kota" value="{{ old('kota') }}">
+                            @error('kota')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
+                        </div>
+                    </div>
+                    <div class=" row mb-2">                       
+                        <label for="zona" class="col-md-3 form-label">Pilih Zona</label>
+                        <div class="col-md-9">
+                            <select class="form-control select2-show-search form-select @error('name') is-invalid state-invalid @enderror" id="zona" name="zona" data-placeholder="Choose one">
+                                <option label="Choose one"></option>
+                                @foreach ($zona as $item)
+                                    <option value="{{$item->id}}">{{$item->zona}}</option>
+                                @endforeach
+                            </select>
+                            @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror 
                         </div>
                     </div>
                     <div class="row mb-2">
                         <label for="harga25" class="col-md-3 form-label">25 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga25') is-invalid state-invalid @enderror" id="harga25" name="harga25" placeholder="0" value="{{ old('harga25') }}">
+                            <input type="number" class="form-control @error('harga25') is-invalid state-invalid @enderror" id="harga25" name="harga25" placeholder="0" value="{{ old('harga25') }}" readonly>
                             @error('harga25')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -74,7 +57,7 @@
                     <div class="row mb-2">
                         <label for="harga50" class="col-md-3 form-label">50 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga50') is-invalid state-invalid @enderror" id="harga50" name="harga50" placeholder="0" value="{{ old('harga50') }}">
+                            <input type="number" class="form-control @error('harga50') is-invalid state-invalid @enderror" id="harga50" name="harga50" placeholder="0" value="{{ old('harga50') }}" readonly>
                             @error('harga50')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -83,17 +66,17 @@
                     <div class="row mb-2">
                         <label for="harga75" class="col-md-3 form-label">75 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga75') is-invalid state-invalid @enderror" id="harga75" name="harga75" placeholder="0" value="{{ old('harga75') }}">
+                            <input type="number" class="form-control @error('harga75') is-invalid state-invalid @enderror" id="harga75" name="harga75" placeholder="0" value="{{ old('harga75') }}" readonly>
                             @error('harga75')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="ket" class="col-md-3 form-label">Jarak KM</label>
+                        <label for="km" class="col-md-3 form-label">Jarak KM</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('ket') is-invalid state-invalid @enderror" id="ket" name="ket" placeholder="Jarak Tempuh" value="{{ old('ket') }}">
-                            @error('ket')
+                            <input type="text" class="form-control @error('km') is-invalid state-invalid @enderror" id="km" name="km" placeholder="Jarak Tempuh" value="{{ old('km') }}">
+                            @error('km')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -115,4 +98,25 @@
     <!-- INTERNAL SELECT2 JS -->
     <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('/assets/js/select2.js') }}"></script>
-@endpush
+    <script type="text/javascript">
+    $('#zona').change(function() {
+        var kode = $('#zona').val();
+        $.ajax({
+            type: "GET",
+            url: "{{ route('price') }}",
+            data: {'id':kode},
+            dataType: 'json',
+            success: function(data) {
+                // console.log(data);
+                $('#harga25').val(data.harga25);
+                $('#harga50').val(data.harga50);
+                $('#harga75').val(data.harga75);
+            },
+            error: function(response) {
+                alert(response.responseJSON.message);
+            }
+        })
+    })
+    </script>
+
+    @endpush

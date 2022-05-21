@@ -85,7 +85,7 @@
                         if (results.success === true) {
                             Swal.fire(
                                 'Deleted!',
-                                'Role berhasil dihapus.',
+                                'Zona berhasil dihapus.',
                                 'success'
                             )
                             // refresh page after 2 seconds
