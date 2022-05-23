@@ -36,13 +36,14 @@ class ZonaController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate(
             [
                 'zona'  =>  'required',
                 'harga25'=>'required',
                 'harga50'=>'required',
-                'harga75'=>'required',
-                'ket'=>'required'
+                'harga100'=>'required',
+                'km'=>'required'
             ]
         );
 
@@ -50,8 +51,8 @@ class ZonaController extends Controller
             'zona'  =>  strtolower($request->zona),
             'harga25'=>$request->harga25,
             'harga50'=>$request->harga50,
-            'harga75'=>$request->harga75,
-            'ket'=>$request->ket
+            'harga100'=>$request->harga100,
+            'km'=>$request->km
         ]);
 
         if ($input) {
@@ -99,8 +100,8 @@ class ZonaController extends Controller
                 'zona'  =>  'required',
                 'harga25'=>'required',
                 'harga50'=>'required',
-                'harga75'=>'required',
-                'ket'=>'required'
+                'harga100'=>'required',
+                'km'=>'required'
             ]
         );
 
@@ -108,8 +109,8 @@ class ZonaController extends Controller
             'zona'  =>  strtolower($request->zona),
             'harga25'=>$request->harga25,
             'harga50'=>$request->harga50,
-            'harga75'=>$request->harga75,
-            'ket'=>$request->ket
+            'harga100'=>$request->harga100,
+            'km'=>$request->km
         ]);
 
         if ($input) {

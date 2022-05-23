@@ -49,7 +49,7 @@
                     <div class="row mb-2">
                         <label for="harga25" class="col-md-3 form-label">25 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga25') is-invalid state-invalid @enderror" id="harga25" name="harga25" placeholder="0" value="{{ old('harga25',$city->harga25) }}" readonly>
+                            <input type="text" class="form-control @error('harga25') is-invalid state-invalid @enderror" id="harga25" name="harga25" placeholder="0" value="{{ old('harga25',$city->harga25) }}" readonly>
                             @error('harga25')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -58,17 +58,17 @@
                     <div class="row mb-2">
                         <label for="harga50" class="col-md-3 form-label">50 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga50') is-invalid state-invalid @enderror" id="harga50" name="harga50" placeholder="0" value="{{ old('harga50',$city->harga50) }}" readonly>
+                            <input type="text" class="form-control @error('harga50') is-invalid state-invalid @enderror" id="harga50" name="harga50" placeholder="0" value="{{ old('harga50',$city->harga50) }}" readonly>
                             @error('harga50')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="harga75" class="col-md-3 form-label">75 %</label>
+                        <label for="harga100" class="col-md-3 form-label">100 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga75') is-invalid state-invalid @enderror" id="harga75" name="harga75" placeholder="0" value="{{ old('harga75',$city->harga75) }}" readonly>
-                            @error('harga75')
+                            <input type="text" class="form-control @error('harga100') is-invalid state-invalid @enderror" id="harga100" name="harga100" placeholder="0" value="{{ old('harga100',$city->harga100) }}" readonly>
+                            @error('harga100')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -110,9 +110,9 @@
             dataType: 'json',
             success: function(data) {
                 // console.log(data);
-                $('#harga25').val(data.harga25);
-                $('#harga50').val(data.harga50);
-                $('#harga75').val(data.harga75);
+                $('#harga25').val("Rp. "+data.harga25);
+                $('#harga50').val("Rp. "+data.harga50);
+                $('#harga75').val("Rp. "+data.harga75);
             },
             error: function(response) {
                 alert(response.responseJSON.message);

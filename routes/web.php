@@ -4,6 +4,7 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ZonaController;
+use App\Models\City;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard.index');
+    $city = City::all();
+    return view('dashboard.index',compact('city'));
 })->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -48,3 +50,4 @@ Route::get('/editCity/{city}', [CityController::class, 'edit'])->name('editCity'
 Route::patch('/updateCity/{city}', [CityController::class, 'update'])->name('updateCity');
 Route::post('/deleteCity/{city}', [CityController::class, 'destroy'])->name('deleteCity');
 Route::get('/price', [CityController::class, 'price'])->name('price');
+Route::get('/priceCity', [CityController::class, 'pricecity'])->name('priceCity');

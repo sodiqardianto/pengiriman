@@ -20,7 +20,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ 'createCity' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah City</a>
+                <a href="{{ 'createCity' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Kota</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">

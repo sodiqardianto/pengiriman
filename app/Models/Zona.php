@@ -13,7 +13,7 @@ class Zona extends Model
         'zona',
         'harga25',
         'harga50',
-        'harga75',
-        'ket',
+        'harga100',
+        'km',
     ];
 }

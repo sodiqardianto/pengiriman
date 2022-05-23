@@ -31,8 +31,8 @@
                                 <th class="wd-15p border-bottom-0">Zona</th>
                                 <th class="wd-15p border-bottom-0">25%</th>
                                 <th class="wd-15p border-bottom-0">50%</th>
-                                <th class="wd-15p border-bottom-0">75%</th>
-                                <th class="wd-15p border-bottom-0">Keterangan</th>
+                                <th class="wd-15p border-bottom-0">100%</th>
+                                <th class="wd-15p border-bottom-0">Jarak Tempuh</th>
                                 <th class="wd-20p border-bottom-0" width="150px">Aksi</th>
                             </tr>
                         </thead>
@@ -43,8 +43,8 @@
                                 <td>{{ ucwords($item->zona) }}</td>
                                 <td>{{ $item->harga25 }}</td>
                                 <td>{{ $item->harga50 }}</td>
-                                <td>{{ $item->harga75 }}</td>
-                                <td>{{ ucwords($item->ket) }}</td>
+                                <td>{{ $item->harga100 }}</td>
+                                <td>{{ ucwords($item->km) }} KM</td>
                                 <td>
                                     <a href="{{ route('editZona', $item->id) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit

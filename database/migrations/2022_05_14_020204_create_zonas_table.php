@@ -18,8 +18,8 @@ class CreateZonasTable extends Migration
             $table->string('zona',15);
             $table->integer('harga25');
             $table->integer('harga50');
-            $table->integer('harga75');
-            $table->text('ket');
+            $table->integer('harga100');
+            $table->text('km');
             $table->timestamps();
         });
     }

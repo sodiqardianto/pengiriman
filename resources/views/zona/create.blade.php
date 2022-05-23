@@ -50,19 +50,19 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="harga75" class="col-md-3 form-label">75 %</label>
+                        <label for="harga100" class="col-md-3 form-label">100 %</label>
                         <div class="col-md-9">
-                            <input type="number" class="form-control @error('harga75') is-invalid state-invalid @enderror" id="harga75" name="harga75" placeholder="0" value="{{ old('harga75') }}">
-                            @error('harga75')
+                            <input type="number" class="form-control @error('harga100') is-invalid state-invalid @enderror" id="harga100" name="harga100" placeholder="0" value="{{ old('harga100') }}">
+                            @error('harga100')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="ket" class="col-md-3 form-label">Jarak KM</label>
+                        <label for="km" class="col-md-3 form-label">Jarak KM</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('ket') is-invalid state-invalid @enderror" id="ket" name="ket" placeholder="Jarak Tempuh" value="{{ old('ket') }}">
-                            @error('ket')
+                            <input type="text" class="form-control @error('km') is-invalid state-invalid @enderror" id="km" name="km" placeholder="Jarak Tempuh" value="{{ old('km') }}">
+                            @error('km')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>

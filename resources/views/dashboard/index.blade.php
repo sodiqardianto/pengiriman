@@ -107,5 +107,82 @@
 </div>
 <!-- ROW-1 END -->
 
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title mb-0">Cek Ongkir</h3>
+            </div>
+            <div class="card-body pt-4">
+                <div class="grid-margin">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="kota" class="form-label">Pilih Kota</label>
+                            
+                                <select class="form-control select2-show-search form-select" id="kota" name="kota" data-placeholder="Choose one">
+                                    <option label="Choose one"></option>
+                                    @foreach ($city as $item)
+                                        <option value="{{$item->id}}">{{ucwords($item->kota)}}</option>
+                                    @endforeach
+                                </select> 
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label for="harga25" class="form-label">25 %</label>
+                            
+                                <input type="text" class="form-control" id="harga25" name="harga25" placeholder="0" readonly>
+                                
+                            
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="harga50" class="form-label">50 %</label>
+                            
+                                <input type="text" class="form-control" id="harga50" name="harga50" placeholder="0" readonly>
+                                
+                            
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="harga100" class="form-label">100 %</label>
+                            
+                                <input type="text" class="form-control" id="harga100" name="harga100" placeholder="0" readonly>
+                                
+                            
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
+
+@push('after-script')
+    <!-- INTERNAL SELECT2 JS -->
+    <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/select2.js') }}"></script>
+    <script type="text/javascript">
+    $('#kota').change(function() {
+        var kode = $('#kota').val();
+        $.ajax({
+            type: "GET",
+            url: "{{ route('priceCity') }}",
+            data: {'id':kode},
+            dataType: 'json',
+            success: function(data) {
+                // console.log(data);
+                $('#harga25').val('RP. '+data.zona.harga25);
+                $('#harga50').val('RP. '+data.zona.harga50);
+                $('#harga100').val('RP. '+data.zona.harga100);
+            },
+            error: function(response) {
+                alert(response.responseJSON.message);
+            }
+        })
+    })
+    </script>
+
+    @endpush
