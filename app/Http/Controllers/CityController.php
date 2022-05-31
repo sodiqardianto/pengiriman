@@ -27,7 +27,7 @@ class CityController extends Controller
     public function create()
     {
         $zona = Zona::all();
-        return view('city.create',compact('zona'));
+        return view('city.create', compact('zona'));
     }
 
     /**
@@ -39,17 +39,17 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $request->validate(
-            [   
-                'kota'=>'required',
+            [
+                'kota' => 'required',
                 'zona'  =>  'required',
-                'km'=>'required'
+                'km' => 'required'
             ]
         );
 
         $input = City::create([
-            'kota'=>strtolower($request->kota),
+            'kota' => strtolower($request->kota),
             'zona_id'  =>  strtolower($request->zona),
-            'km'=>$request->km
+            'km' => $request->km
         ]);
 
         if ($input) {
@@ -80,8 +80,9 @@ class CityController extends Controller
      */
     public function edit(City $city)
     {
-        $zona=Zona::all();
-        return view('city.edit', compact('city','zona'));
+        $zona = Zona::all();
+        $hargaZona = Zona::find($city->zona_id);
+        return view('city.edit', compact('city', 'zona', 'hargaZona'));
     }
 
     /**
@@ -94,17 +95,17 @@ class CityController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate(
-            [   
-                'kota'=>'required',
+            [
+                'kota' => 'required',
                 'zona'  =>  'required',
-                'km'=>'required'
+                'km' => 'required'
             ]
         );
 
         $input = City::find($id)->update([
-            'kota'=>strtolower($request->kota),
+            'kota' => strtolower($request->kota),
             'zona_id'  =>  strtolower($request->zona),
-            'km'=>$request->km
+            'km' => $request->km
         ]);
 
         if ($input) {

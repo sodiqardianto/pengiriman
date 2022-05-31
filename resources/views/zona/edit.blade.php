@@ -60,10 +60,10 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                        <label for="ket" class="col-md-3 form-label">Jarak KM</label>
+                        <label for="km" class="col-md-3 form-label">Jarak KM</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('ket') is-invalid state-invalid @enderror" id="ket" name="ket" placeholder="Jarak Tempuh" value="{{ old('ket',ucwords($zona->ket)) }}">
-                            @error('ket')
+                            <input type="text" class="form-control @error('km') is-invalid state-invalid @enderror" id="km" name="km" placeholder="Jarak Tempuh" value="{{ old('km',ucwords($zona->km)) }}">
+                            @error('km')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -71,7 +71,7 @@
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
                             <button class="btn btn-primary">Edit Zona</button>
-                            <a href="/role" class="btn btn-secondary">Kembali</a>
+                            <a href="/zona" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </form>

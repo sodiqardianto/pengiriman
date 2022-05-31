@@ -84,7 +84,7 @@
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
                             <button class="btn btn-primary">Tambah Zona</button>
-                            <a href="/zona" class="btn btn-secondary">Kembali</a>
+                            <a href="/city" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </form>

@@ -49,7 +49,7 @@
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-8">
                             <button type="submit" class="btn btn-primary">Tambah</button>
-                            <a href="/role" class="btn btn-secondary">Kembali</a>
+                            <a href="/transaction" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </form>

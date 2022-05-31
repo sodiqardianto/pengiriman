@@ -36,23 +36,22 @@ class ZonaController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate(
             [
                 'zona'  =>  'required',
-                'harga25'=>'required',
-                'harga50'=>'required',
-                'harga100'=>'required',
-                'km'=>'required'
+                'harga25' => 'required',
+                'harga50' => 'required',
+                'harga100' => 'required',
+                'km' => 'required'
             ]
         );
 
         $input = Zona::create([
             'zona'  =>  strtolower($request->zona),
-            'harga25'=>$request->harga25,
-            'harga50'=>$request->harga50,
-            'harga100'=>$request->harga100,
-            'km'=>$request->km
+            'harga25' => $request->harga25,
+            'harga50' => $request->harga50,
+            'harga100' => $request->harga100,
+            'km' => $request->km
         ]);
         if ($input) {
             //redirect dengan pesan sukses
@@ -97,21 +96,21 @@ class ZonaController extends Controller
         $request->validate(
             [
                 'zona'  =>  'required',
-                'harga25'=>'required',
-                'harga50'=>'required',
-                'harga100'=>'required',
-                'km'=>'required'
+                'harga25' => 'required',
+                'harga50' => 'required',
+                'harga100' => 'required',
+                'km' => 'required'
             ]
         );
 
         $input = Zona::find($id)->update([
             'zona'  =>  strtolower($request->zona),
-            'harga25'=>$request->harga25,
-            'harga50'=>$request->harga50,
-            'harga100'=>$request->harga100,
-            'km'=>$request->km
+            'harga25' => $request->harga25,
+            'harga50' => $request->harga50,
+            'harga100' => $request->harga100,
+            'km' => $request->km
         ]);
-        
+
         if ($input) {
             //redirect dengan pesan sukses
             return redirect()->route('zona')->with(['success' => 'Data Berhasil Diperbarui!']);

@@ -38,7 +38,7 @@
                             <select class="form-control select2-show-search form-select @error('name') is-invalid state-invalid @enderror" id="zona" name="zona" data-placeholder="Choose one">
                                 <option label="Choose one"></option>
                                 @foreach ($zona as $item)
-                                    <option value="{{$item->id}}" {{$city->id==$item->id?'selected':''}}>{{$item->zona}}</option>
+                                    <option value="{{$item->id}}" {{$city->id==$item->id?'selected':''}}>{{ucwords($item->zona)}}</option>
                                 @endforeach
                             </select>
                             @error('name')
@@ -49,7 +49,7 @@
                     <div class="row mb-2">
                         <label for="harga25" class="col-md-3 form-label">25 %</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('harga25') is-invalid state-invalid @enderror" id="harga25" name="harga25" placeholder="0" value="{{ old('harga25',$city->harga25) }}" readonly>
+                            <input type="text" class="form-control @error('harga25') is-invalid state-invalid @enderror" id="harga25" name="harga25" placeholder="0" value="{{ old('harga25',$hargaZona->harga25) }}" readonly>
                             @error('harga25')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -58,7 +58,7 @@
                     <div class="row mb-2">
                         <label for="harga50" class="col-md-3 form-label">50 %</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('harga50') is-invalid state-invalid @enderror" id="harga50" name="harga50" placeholder="0" value="{{ old('harga50',$city->harga50) }}" readonly>
+                            <input type="text" class="form-control @error('harga50') is-invalid state-invalid @enderror" id="harga50" name="harga50" placeholder="0" value="{{ old('harga50',$hargaZona->harga50) }}" readonly>
                             @error('harga50')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -67,7 +67,7 @@
                     <div class="row mb-2">
                         <label for="harga100" class="col-md-3 form-label">100 %</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('harga100') is-invalid state-invalid @enderror" id="harga100" name="harga100" placeholder="0" value="{{ old('harga100',$city->harga100) }}" readonly>
+                            <input type="text" class="form-control @error('harga100') is-invalid state-invalid @enderror" id="harga100" name="harga100" placeholder="0" value="{{ old('harga100',$hargaZona->harga100) }}" readonly>
                             @error('harga100')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -86,7 +86,7 @@
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
                             <button class="btn btn-primary">Edit Kota</button>
-                            <a href="/role" class="btn btn-secondary">Kembali</a>
+                            <a href="/city" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
                 </form>

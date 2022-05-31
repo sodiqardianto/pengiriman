@@ -30,30 +30,30 @@
                 <li class="sub-category">
                     <h3>Management</h3>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                <li class="slide @if (Request::segment(1) == 'role' || Request::segment(1) == 'createRole' || Request::segment(1) == 'editRole' || Request::segment(1) == 'aksesRole') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'role' || Request::segment(1) == 'createRole' || Request::segment(1) == 'editRole' || Request::segment(1) == 'aksesRole') active @endif" data-bs-toggle="slide" href="#"><i
                             class="side-menu__icon fe fe-slack"></i><span
                             class="side-menu__label">Management</span><i
                             class="angle fe fe-chevron-right"></i></a>
-                    <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)">Management</a></li>
-                        <li><a href="{{ 'role' }}" class="slide-item"> Role Management</a></li>
-                        <li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
-                        <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li>
+                    <ul class="slide-menu ">
+                        <li class="side-menu-label1"><a href="#">Management</a></li>
+                        <li><a href="/role" class="slide-item @if (Request::segment(1) == 'role' || Request::segment(1) == 'createRole' || Request::segment(1) == 'editRole' || Request::segment(1) == 'aksesRole') active @endif"> Role Management</a></li>
+                        {{-- <li><a href="calendar.html" class="slide-item"> Default calendar</a></li>
+                        <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li> --}}
                     </ul>
                 </li>
                 <li class="sub-category">
                     <h3>Data</h3>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                <li class="slide @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona' || Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona' || Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') active @endif" data-bs-toggle="slide" href="#"><i
                             class="side-menu__icon fe fe-box"></i><span
                             class="side-menu__label">Master Data</span><i
                             class="angle fe fe-chevron-right"></i></a>
                     <ul class="slide-menu">
-                        <li class="side-menu-label1"><a href="javascript:void(0)">Master Data</a></li>
-                        <li><a href="{{ 'zona' }}" class="slide-item"> Zona</a></li>
-                        <li><a href="{{ 'city' }}" class="slide-item"> Kota</a></li>
+                        <li class="side-menu-label1"><a href="#">Master Data</a></li>
+                        <li><a href="/zona" class="slide-item @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona') active @endif"> Zona</a></li>
+                        <li><a href="/city" class="slide-item @if (Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') active @endif"> Kota</a></li>
                     </ul>
                 </li>
                 <li class="sub-category">
@@ -68,7 +68,7 @@
                     <h3>Laporan</h3>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+                    <a class="side-menu__item" data-bs-toggle="slide" href="#"><i
                             class="side-menu__icon fe fe-book-open"></i><span
                             class="side-menu__label">Report</span><i
                             class="angle fe fe-chevron-right"></i></a>
