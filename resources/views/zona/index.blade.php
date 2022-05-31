@@ -41,9 +41,9 @@
                             <tr>
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ ucwords($item->zona) }}</td>
-                                <td>{{ $item->harga25 }}</td>
-                                <td>{{ $item->harga50 }}</td>
-                                <td>{{ $item->harga100 }}</td>
+                                <td>Rp. {{ $item->harga25 }}</td>
+                                <td>Rp. {{ $item->harga50 }}</td>
+                                <td>Rp. {{ $item->harga100 }}</td>
                                 <td>{{ ucwords($item->km) }} KM</td>
                                 <td>
                                     <a href="{{ route('editZona', $item->id) }}" class="btn btn-warning btn-sm">

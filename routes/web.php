@@ -3,8 +3,8 @@
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ZonaController;
-use App\Models\City;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,10 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $city = City::all();
-    return view('dashboard.index',compact('city'));
-})->middleware('auth');
+Route::get('/', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -51,3 +48,12 @@ Route::patch('/updateCity/{city}', [CityController::class, 'update'])->name('upd
 Route::post('/deleteCity/{city}', [CityController::class, 'destroy'])->name('deleteCity');
 Route::get('/price', [CityController::class, 'price'])->name('price');
 Route::get('/priceCity', [CityController::class, 'pricecity'])->name('priceCity');
+
+// Transaction
+Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+Route::get('/createTransaction', [TransactionController::class, 'create'])->name('createTransaction');
+Route::post('/storeTransaction', [TransactionController::class, 'store'])->name('storeTransaction');
+Route::get('/editTransaction/{transaction}', [TransactionController::class, 'edit'])->name('editTransaction');
+Route::patch('/updateTransaction/{transaction}', [TransactionController::class, 'update'])->name('updateTransaction');
+Route::post('/deleteTransaction/{transaction}', [TransactionController::class, 'destroy'])->name('deleteTransaction');
+Route::get('/inputBarang/{barang}', [TransactionController::class, 'show'])->name('inputBarang');

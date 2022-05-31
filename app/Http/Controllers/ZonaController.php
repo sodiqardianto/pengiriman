@@ -54,7 +54,6 @@ class ZonaController extends Controller
             'harga100'=>$request->harga100,
             'km'=>$request->km
         ]);
-
         if ($input) {
             //redirect dengan pesan sukses
             return redirect()->route('zona')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -112,7 +111,7 @@ class ZonaController extends Controller
             'harga100'=>$request->harga100,
             'km'=>$request->km
         ]);
-
+        
         if ($input) {
             //redirect dengan pesan sukses
             return redirect()->route('zona')->with(['success' => 'Data Berhasil Diperbarui!']);
