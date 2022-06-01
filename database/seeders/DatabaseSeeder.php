@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             ZonaSeeder::class,
+            IndoRegionSeeder::class,
         ]);
     }
 }

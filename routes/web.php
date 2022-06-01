@@ -49,6 +49,12 @@ Route::post('/deleteCity/{city}', [CityController::class, 'destroy'])->name('del
 Route::get('/price', [CityController::class, 'price'])->name('price');
 Route::get('/priceCity', [CityController::class, 'pricecity'])->name('priceCity');
 
+// 
+Route::post('/getKabupaten', [CityController::class, 'getKabupaten'])->name('getKabupaten');
+Route::post('/getKecamatan', [CityController::class, 'getKecamatan'])->name('getKecamatan');
+Route::post('/getKelurahan', [CityController::class, 'getKelurahan'])->name('getKelurahan');
+
+
 // Transaction
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
 Route::get('/createTransaction', [TransactionController::class, 'create'])->name('createTransaction');

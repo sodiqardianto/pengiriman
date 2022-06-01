@@ -17,16 +17,48 @@
 <!-- PAGE-HEADER END -->
 
 <div class="row">
-    <div class="col-md-12 col-xl-6">
+    <div class="col-md-12 col-xl-10">
         <div class="card">
             <div class="card-body">
                 <form class="form-horizontal" action="{{ route('storeCity') }}" method="POST">
                     @csrf
                     <div class="row mb-2">
-                        <label for="kota" class="col-md-3 form-label">Nama Kota</label>
+                        <label for="provinsi" class="col-md-3 form-label">Nama Provinsi</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control @error('kota') is-invalid state-invalid @enderror" id="kota" name="kota" placeholder="Masukan Nama Kota" value="{{ old('kota') }}">
-                            @error('kota')
+                            <select class="form-control select2-show-search form-select @error('provinsi') is-invalid state-invalid @enderror" id="provinsi" name="provinsi" data-placeholder="Pilih Provinsi">
+                                <option label="Choose one"></option>
+                                @foreach ($provinsi as $item)
+                                    <option value="{{$item->id}}">{{ucwords($item->name)}}</option>
+                                @endforeach
+                            </select>
+                            @error('provinsi')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="kabupaten" class="col-md-3 form-label">Nama Kota/Kabupaten</label>
+                        <div class="col-md-9">
+                            <select class="form-control select2-show-search form-select @error('kabupaten') is-invalid state-invalid @enderror" id="kabupaten" name="kabupaten" data-placeholder="Pilih Kota/Kabupaten"></select>
+                            @error('kabupaten')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="kecamatan" class="col-md-3 form-label">Nama Kecamatan</label>
+                        <div class="col-md-9">
+                            <select class="form-control select2-show-search form-select @error('provinsi') is-invalid state-invalid @enderror" id="kecamatan" name="kecamatan" data-placeholder="Pilih Kecamatan"></select>
+                            @error('kecamatan')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="kelurahan" class="col-md-3 form-label">Nama Kelurahan</label>
+                        <div class="col-md-9">
+                            <select class="form-control select2-show-search form-select @error('kelurahan') is-invalid state-invalid @enderror" id="kelurahan" name="kelurahan" data-placeholder="Pilih Kelurahan"></select>
+                            @error('kelurahan')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -83,7 +115,7 @@
                     </div>
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-9">
-                            <button class="btn btn-primary">Tambah Zona</button>
+                            <button class="btn btn-primary">Tambah Kota</button>
                             <a href="/city" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>
@@ -119,4 +151,64 @@
     })
     </script>
 
-    @endpush
+    <script>
+        $(function() {
+            $.ajaxSetup({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            })
+        })
+
+        $(function() {
+            $('#provinsi').on('change', function() {
+                let id_provinsi = $('#provinsi').val()
+
+                $.ajax({
+                    url: "{{ route('getKabupaten') }}",
+                    type: "POST",
+                    data: {id_provinsi:id_provinsi},
+                    cache: false,
+                    success: function(msg) {
+                        $('#kabupaten').html(msg)
+                    },
+                    error: function(data) {
+                        console.log('error:', data)
+                    }
+                })
+            })
+
+            $('#kabupaten').on('change', function() {
+                let id_kabupaten = $('#kabupaten').val()
+
+                $.ajax({
+                    url: "{{ route('getKecamatan') }}",
+                    type: "POST",
+                    data: {id_kabupaten:id_kabupaten},
+                    cache: false,
+                    success: function(msg) {
+                        $('#kecamatan').html(msg)
+                    },
+                    error: function(data) {
+                        console.log('error:', data)
+                    }
+                })
+            })
+
+            $('#kecamatan').on('change', function() {
+                let id_kecamatan = $('#kecamatan').val()
+
+                $.ajax({
+                    url: "{{ route('getKelurahan') }}",
+                    type: "POST",
+                    data: {id_kecamatan:id_kecamatan},
+                    cache: false,
+                    success: function(msg) {
+                        $('#kelurahan').html(msg)
+                    },
+                    error: function(data) {
+                        console.log('error:', data)
+                    }
+                })
+            })
+        })
+    </script>
+@endpush

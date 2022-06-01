@@ -16,7 +16,10 @@ class CreateCitiesTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->foreignid('zona_id')->references('id')->on('zonas')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('kota',25);
+            $table->integer('provinsi_id');
+            $table->integer('kabupaten_id');
+            $table->integer('kecamatan_id');
+            $table->bigInteger('kelurahan_id');
             $table->integer('km');
             $table->timestamps();
         });
