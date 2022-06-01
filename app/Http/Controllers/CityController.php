@@ -43,11 +43,9 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate(
             [
-                'provinsi' => 'required',
-                'kabupaten' => 'required',
-                'kecamatan' => 'required',
                 'kelurahan' => 'required',
                 'zona'  =>  'required',
                 'km' => 'required'
@@ -55,10 +53,7 @@ class CityController extends Controller
         );
 
         $input = City::create([
-            'provinsi_id' => $request->provinsi,
-            'kabupaten_id' => $request->kabupaten,
-            'kecamatan_id' => $request->kecamatan,
-            'kelurahan_id' => $request->kelurahan,
+            'village_id' => $request->kelurahan,
             'zona_id'  =>  strtolower($request->zona),
             'km' => $request->km
         ]);

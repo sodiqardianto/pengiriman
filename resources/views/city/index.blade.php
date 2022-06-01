@@ -42,9 +42,9 @@
                             <tr>
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ ucwords($item->zona->zona) }}</td>
-                                <td>{{ ucwords($item->provinsi->name) }}</td>
-                                <td>{{ ucwords($item->kabupaten->name) }}</td>
-                                <td>{{ ucwords($item->kecamatan->name) }}</td>
+                                <td>{{ ucwords($item->kelurahan->district->regency->province->name) }}</td>
+                                <td>{{ ucwords($item->kelurahan->district->regency->name) }}</td>
+                                <td>{{ ucwords($item->kelurahan->district->name) }}</td>
                                 <td>{{ ucwords($item->kelurahan->name) }}</td>
                                 <td>{{ $item->km }} KM</td>
                                 <td>

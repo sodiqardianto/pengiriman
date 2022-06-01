@@ -44,7 +44,7 @@ class District extends Model
      */
     public function regency()
     {
-        return $this->belongsTo(Regency::class);
+        return $this->belongsTo(Regency::class,'regency_id');
     }
 
     /**
