@@ -48,6 +48,7 @@ Route::patch('/updateCity/{city}', [CityController::class, 'update'])->name('upd
 Route::post('/deleteCity/{city}', [CityController::class, 'destroy'])->name('deleteCity');
 Route::get('/price', [CityController::class, 'price'])->name('price');
 Route::get('/priceCity', [CityController::class, 'pricecity'])->name('priceCity');
+Route::get('/city/data', [CityController::class, 'data'])->name('dataCity');
 
 // 
 Route::post('/getKabupaten', [CityController::class, 'getKabupaten'])->name('getKabupaten');

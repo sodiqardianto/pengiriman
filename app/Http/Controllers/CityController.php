@@ -9,9 +9,16 @@ use App\Models\Regency;
 use App\Models\Village;
 use App\Models\Zona;
 use Illuminate\Http\Request;
+use DataTables;
 
 class CityController extends Controller
 {
+    public function data(){
+        $data = City::all();
+        return DataTables::of($data)
+        ->addIndexColumn()
+        ->make(true);
+    }
     /**
      * Display a listing of the resource.
      *

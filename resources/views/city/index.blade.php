@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($city as $no => $item)
+                            {{-- @foreach ($city as $no => $item)
                             <tr>
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ ucwords($item->zona->zona) }}</td>
@@ -54,7 +54,7 @@
                                     <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -63,6 +63,74 @@
     </div>
 </div>
 @push('after-script')
+<script type="text/javascript">
+        (function() {
+        loadDataTable();
+    })();
+    function loadDataTable() {
+        $(document).ready(function() {
+            $('#responsive-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('dataCity') }}",
+                    type: "GET",
+                },
+                columns: [{
+                        data: "DT_RowIndex",
+                        name: "DT_RowIndex"
+                    },
+                    {
+                        data: 'zona_id',
+                        name: 'zona_id'
+                    },
+
+                    {
+                        data: 'village_id',
+                        name: 'village_id'
+                    },
+
+                    {
+                        data: 'village_id',
+                        name: 'village_id'
+                    },
+
+                    {
+                        data: 'village_id',
+                        name: 'village_id'
+                    },
+
+                    {
+                        data: 'village_id',
+                        name: 'village_id'
+                    },
+
+                    {
+                        data: 'km',
+                        name: 'km'
+                    },
+                    {
+                        data: 'id',
+                        name: 'id',
+                        render: function(value, param, data) {
+                            return '<div class="btn-group">' +
+                                '<a class="btn btn-sm btn-primary" href="/categories/' + value +
+                                '/edit"><i class="fas fa-edit"></i></a> ' +
+
+                                '<button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirm(' +
+                                value + ')"><i class="fas fa-trash"></i></button>' +
+                                '</div> ';
+                        }
+                    }
+
+                ],
+                order: [
+                    [0, 'asc']
+                ]
+            });
+        });
+    }
+  </script>
 <script>
     function deleteConfirmation(id, name) {
         Swal.fire({
