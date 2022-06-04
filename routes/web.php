@@ -49,7 +49,7 @@ Route::post('/deleteCity/{city}', [CityController::class, 'destroy'])->name('del
 Route::get('/price', [CityController::class, 'price'])->name('price');
 Route::get('/priceCity', [CityController::class, 'pricecity'])->name('priceCity');
 Route::get('/city/data', [CityController::class, 'data'])->name('dataCity');
-
+Route::get('/totalharga', [CityController::class, 'totalharga'])->name('totalharga');
 // 
 Route::post('/getKabupaten', [CityController::class, 'getKabupaten'])->name('getKabupaten');
 Route::post('/getKecamatan', [CityController::class, 'getKecamatan'])->name('getKecamatan');

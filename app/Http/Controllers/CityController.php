@@ -221,4 +221,14 @@ class CityController extends Controller
         }
         echo $option;
     }
+
+    public function totalharga(Request $request)
+    {
+        $city = City::where('id',$request->id)->first();
+        $total100= $city->zona->harga100*$request->total100;
+        $total50= $city->zona->harga50*$request->total50;
+        $total25= $city->zona->harga25*$request->total25;
+        $totalharga=$total100+$total50+$total25;
+        return response()->json($totalharga);
+    }
 }
