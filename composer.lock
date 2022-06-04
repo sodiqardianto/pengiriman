@@ -5954,6 +5954,7 @@
             "support": {
                 "issues": "https://github.com/webmozarts/assert/issues",
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
+<<<<<<< Updated upstream
             },
             "time": "2022-06-03T18:03:27+00:00"
         },
@@ -6041,6 +6042,10 @@
                 }
             ],
             "time": "2022-05-08T16:04:16+00:00"
+=======
+            },
+            "time": "2022-06-03T18:03:27+00:00"
+>>>>>>> Stashed changes
         }
     ],
     "packages-dev": [

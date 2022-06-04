@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -24,7 +25,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $city = City::all();
-        return view('dashboard.index',compact('city'));
+        $provinsi = Province::all();
+        return view('dashboard.index', compact('provinsi'));
     }
 }
