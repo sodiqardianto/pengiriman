@@ -15,11 +15,27 @@ class CityController extends Controller
 {
     public function data()
     {
-        $data = City::join('villages', 'cities.village_id', '=', 'villages.id')
-            ->join('districts', 'villages.district_id', '=', 'districts.id');
+        // $data = City::join('villages', 'cities.village_id', '=', 'villages.id')
+        //     ->join('districts', 'villages.district_id', '=', 'districts.id');
         // ->join('regencies', 'villages.regency_id', '=', 'regencies.id');
+        $data = City::all();
         return DataTables::of($data)
             ->addIndexColumn()
+            ->addColumn('zona',function($data){
+                return $data->zona->zona;
+            })
+            ->addColumn('province',function($data){
+                return $data->kelurahan->district->regency->province->name;
+            })
+            ->addColumn('regency',function($data){
+                return $data->kelurahan->district->regency->name;
+            })
+            ->addColumn('district',function($data){
+                return $data->kelurahan->district->name;
+            })
+            ->addColumn('kelurahan',function($data){
+                return $data->kelurahan->name;
+            })
             ->make(true);
     }
     /**

@@ -30,8 +30,8 @@
                                 <th class="wd-15p border-bottom-0" width="50px">No</th>
                                 <th class="wd-15p border-bottom-0">Zona</th>
                                 <th class="wd-15p border-bottom-0">Provinsi</th>
-                                <th class="wd-15p border-bottom-0">Kabupaten</th>
                                 <th class="wd-15p border-bottom-0">Kecamatan</th>
+                                <th class="wd-15p border-bottom-0">Kabupaten</th>
                                 <th class="wd-15p border-bottom-0">Kelurahan</th>
                                 <th class="wd-15p border-bottom-0">KM</th>
                                 <th class="wd-20p border-bottom-0" width="150px">Aksi</th>
@@ -85,28 +85,29 @@
                         searchable: false
                     },
                     {
-                        data: 'zona_id',
-                        name: 'zona_id'
+                        data: 'zona',
+                        name: 'zona'
                     },
 
                     {
-                        data: 'village_id',
-                        name: 'village_id'
+                        data: 'province',
+                        name: 'province'
                     },
 
                     {
-                        data: 'village_id',
-                        name: 'village_id'
+                        data: 'regency',
+                        name: 'regency'
                     },
 
                     {
-                        data: 'regency_id',
-                        name: 'regency_id'
+                        data: 'district',
+                        name: 'district'
                     },
 
+
                     {
-                        data: 'village_id',
-                        name: 'village_id'
+                        data: 'kelurahan',
+                        name: 'kelurahan'
                     },
 
                     {
