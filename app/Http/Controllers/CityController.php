@@ -13,11 +13,14 @@ use DataTables;
 
 class CityController extends Controller
 {
-    public function data(){
-        $data = City::all();
+    public function data()
+    {
+        $data = City::join('villages', 'cities.village_id', '=', 'villages.id')
+            ->join('districts', 'villages.district_id', '=', 'districts.id');
+        // ->join('regencies', 'villages.regency_id', '=', 'regencies.id');
         return DataTables::of($data)
-        ->addIndexColumn()
-        ->make(true);
+            ->addIndexColumn()
+            ->make(true);
     }
     /**
      * Display a listing of the resource.
@@ -50,7 +53,7 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate(
             [
                 'kelurahan' => 'required',

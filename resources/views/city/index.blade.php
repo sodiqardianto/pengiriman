@@ -23,7 +23,7 @@
                 <a href="{{ 'createCity' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Kota</a>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
+                <div>
                     <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
                         <thead>
                             <tr>
@@ -70,15 +70,19 @@
     function loadDataTable() {
         $(document).ready(function() {
             $('#responsive-datatable').DataTable({
+                destroy: true,
                 processing: true,
                 serverSide: true,
+                responsive: true,
                 ajax: {
                     url: "{{ route('dataCity') }}",
                     type: "GET",
                 },
                 columns: [{
                         data: "DT_RowIndex",
-                        name: "DT_RowIndex"
+                        name: "DT_RowIndex",
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'zona_id',
@@ -96,8 +100,8 @@
                     },
 
                     {
-                        data: 'village_id',
-                        name: 'village_id'
+                        data: 'regency_id',
+                        name: 'regency_id'
                     },
 
                     {
@@ -130,7 +134,7 @@
             });
         });
     }
-  </script>
+</script>
 <script>
     function deleteConfirmation(id, name) {
         Swal.fire({
