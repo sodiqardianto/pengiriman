@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\DetailTransaction;
+use App\Models\Province;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -17,7 +20,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transaction = Transaction::all();
-        return view('transaction.index',compact('transaction'));
+        return view('transaction.index', compact('transaction'));
     }
 
     /**
@@ -27,8 +30,8 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        $city = City::all();
-        return view('transaction.create',compact('city'));
+        $provinsi = Province::all();
+        return view('transaction.create', compact('provinsi'));
     }
 
     /**
@@ -39,18 +42,30 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         $request->validate(
-            [   
-                'name'=>'required',
-                'kota'  =>'required'
+            [
+                'name' => 'required',
+                'no_telp' => 'required',
+                'provinsi'  => 'required',
+                'kabupaten'  => 'required',
+                'kecamatan'  => 'required',
+                'kelurahan'  => 'required',
             ]
         );
 
+        $last = Transaction::max('id');
+        foreach ($request->input('mobil') as $key => $value) {
+            DetailTransaction::create([
+                'transaction_id' => $last,
+                'mobil' => $value,
+                'created_by' => Auth::user()->id
+            ]);
+        }
+
         $input = Transaction::create([
             'nama'  =>  strtolower($request->name),
-            'user_id'=> Auth::user()->id,
-            'city_id'=>$request->kota
+            'user_id' => Auth::user()->id,
+            'city_id' => $request->provinsi
         ]);
         if ($input) {
             //redirect dengan pesan sukses

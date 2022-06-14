@@ -119,19 +119,20 @@
                         name: 'id',
                         render: function(value, param, data) {
                             return '<div class="btn-group">' +
-                                '<a class="btn btn-sm btn-primary" href="/categories/' + value +
-                                '/edit"><i class="fas fa-edit"></i></a> ' +
+                                '<a class="btn btn-sm btn-primary" href="/editCity/' + value +
+                                '"><i class="fa fa-edit"></i></a> ' +
 
-                                '<button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirm(' +
-                                value + ')"><i class="fas fa-trash"></i></button>' +
+                                '<button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirmation(' +
+                                value + ')"><i class="fa fa-trash"></i></button>' +
                                 '</div> ';
-                        }
+                        },
+                        orderable: false,
                     }
 
                 ],
                 order: [
                     [0, 'asc']
-                ]
+                ],
             });
         });
     }
