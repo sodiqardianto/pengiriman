@@ -42,6 +42,10 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        $city = City::where('village_id',$request->kelurahan)->first();
+        if($city==false){
+            return redirect()->route('createTransaction')->with(['error' => 'Kelurahan Belum Terdaftar!']);
+        }
         $request->validate(
             [
                 'name' => 'required',
@@ -53,20 +57,21 @@ class TransactionController extends Controller
             ]
         );
 
-        $last = Transaction::max('id');
-        foreach ($request->input('mobil') as $key => $value) {
-            DetailTransaction::create([
-                'transaction_id' => $last,
-                'mobil' => $value,
-                'created_by' => Auth::user()->id
-            ]);
-        }
-
+        
+        
         $input = Transaction::create([
             'nama'  =>  strtolower($request->name),
             'user_id' => Auth::user()->id,
-            'city_id' => $request->provinsi
+            'city_id' => $city->id
         ]);
+        
+        $last = Transaction::max('id');
+        foreach ($request->input('mobil') as $key => $value) {
+            DetailTransaction::create([
+                'transaction_id' => $input->id,
+                'muatan' => $value
+            ]);
+        }
         if ($input) {
             //redirect dengan pesan sukses
             return redirect()->route('transaction')->with(['success' => 'Data Berhasil Disimpan!']);

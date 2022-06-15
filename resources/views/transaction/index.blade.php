@@ -39,7 +39,7 @@
                             <tr>
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ ucwords($item->nama) }}</td>
-                                <td>{{ ucwords($item->city->kota) }}</td>
+                                <td>{{ ucwords($item->city->kelurahan->name) }}</td>
                                 <td>{{ ucwords($item->user->name) }}</td>
                                 <td>
                                     <a href="{{ route('editRole', $item->id) }}" class="btn btn-warning btn-sm">

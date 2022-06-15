@@ -10,4 +10,6 @@ class DetailTransaction extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    protected $table = "transaction_datas";
 }
