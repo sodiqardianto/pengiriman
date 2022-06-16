@@ -117,15 +117,15 @@
                 <div class="grid-margin">
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="provinsi" class="form-label">Pilih Provinsi</label>
-                            <select class="form-control select2-show-search form-select" id="provinsi" name="provinsi" data-placeholder="Pilih Provinsi">
-                                <option value="" selected disabled>Pilih Provinsi</option>
-                                @foreach ($provinsi as $item)
-                                    <option value="{{$item->id}}">{{ucwords($item->name)}}</option>
+                            <label for="kelurahan" class="form-label">Pilih Kelurahan</label>
+                            <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Pilih kelurahan">
+                                <option value="" selected disabled>Pilih Kelurahan</option>
+                                @foreach ($kelurahan as $item)
+                                    <option value="{{$item->village_id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
                                 @endforeach
                             </select> 
                         </div>
-                        <div class="col-sm-12">
+                        {{-- <div class="col-sm-12">
                             <label for="kabupaten" class="form-label">Pilih Kota/Kabupaten</label>
                             <select class="form-control select2-show-search form-select" id="kabupaten" name="kabupaten" data-placeholder="Choose one"></select> 
                         </div>
@@ -136,7 +136,7 @@
                         <div class="col-sm-12">
                             <label for="kelurahan" class="form-label">Pilih Kelurahan</label>
                             <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Choose one"></select> 
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="row">
                         <div class="col-sm-4">

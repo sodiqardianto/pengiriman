@@ -25,7 +25,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $provinsi = Province::all();
-        return view('dashboard.index', compact('provinsi'));
+        // $provinsi = Province::all();
+        $kelurahan = City::all();
+        return view('dashboard.index', compact('kelurahan'));
     }
 }
