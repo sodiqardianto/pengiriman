@@ -12,7 +12,7 @@ class City extends Model
 
     public function zona()
     {
-        return $this->belongsTo(Zona::class);
+        return $this->belongsTo(Zona::class,'zona_id');
     }
 
     // public function provinsi()

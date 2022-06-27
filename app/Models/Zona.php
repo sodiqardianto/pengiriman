@@ -16,4 +16,8 @@ class Zona extends Model
         'harga100',
         'km',
     ];
+
+    public function city(){
+        return $this->hasMany(Zona::class,'zona_id');
+    }
 }

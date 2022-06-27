@@ -12,4 +12,12 @@ class DetailTransaction extends Model
     protected $guarded = [];
 
     protected $table = "transaction_datas";
+
+    public function city(){
+        return $this->belongsTo(City::class,'city_id');
+    }
+
+    public function zona(){
+        return $this->belongsTo(Zona::class,'zona_id');
+    }
 }

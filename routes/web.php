@@ -64,3 +64,7 @@ Route::get('/editTransaction/{transaction}', [TransactionController::class, 'edi
 Route::patch('/updateTransaction/{transaction}', [TransactionController::class, 'update'])->name('updateTransaction');
 Route::post('/deleteTransaction/{transaction}', [TransactionController::class, 'destroy'])->name('deleteTransaction');
 Route::get('/inputBarang/{barang}', [TransactionController::class, 'show'])->name('inputBarang');
+
+
+// Report
+Route::get('/report', [TransactionController::class, 'report'])->name('report');

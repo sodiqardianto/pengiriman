@@ -19,7 +19,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transaction = Transaction::all();
+        $transaction = Transaction::whereDate('created_at','=',date('Y-m-d'))->get();
         return view('transaction.index', compact('transaction'));
     }
 
@@ -29,9 +29,10 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   
+        $kelurahan = City::all();
         $provinsi = Province::all();
-        return view('transaction.create', compact('provinsi'));
+        return view('transaction.create', compact('provinsi',"kelurahan"));
     }
 
     /**
@@ -124,5 +125,10 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function report(){
+        $transaction = Transaction::all();
+        return view('report.index', compact('transaction'));
     }
 }

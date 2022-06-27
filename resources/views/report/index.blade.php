@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Transaksi')
+@section('title', 'Report')
 
 @section('content')
 
@@ -14,27 +14,44 @@
     </div>
 </div>
 <!-- PAGE-HEADER END -->
+<div class="row">
+    <div class="col-lg-12 ">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <label class="col-md-2 form-label" for="filter">Pilih Filter</label>
+                    <div class="col-md-4">
+                    <select name="filter" class="form-select select2-show-search" id="filter">
+                        <option value="">Pilih</option>
+                        <option value="harian">Harian</option>
+                        <option value="range">Tanggal</option>
+                        <option value="bulan">Bulan</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="row">
 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Row -->
 <div class="row row-sm">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <a href="{{ 'createTransaction' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Transaksi</a>
-            </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
                         <thead>
                             <tr>
                                 <th class="wd-15p border-bottom-0" width="50px">No</th>
-                                <th class="wd-15p border-bottom-0">Nama Customer</th>
+                                <th class="wd-15p border-bottom-0">Customer</th>
                                 <th class="wd-15p border-bottom-0">Kota Tujuan</th>
-                                <th class="wd-15p border-bottom-0">Nama Petugas Input</th>
+                                <th class="wd-15p border-bottom-0">Petugas Input</th>
                                 <th class="wd-15p border-bottom-0">Total Surat Jalan</th>
                                 <th class="wd-15p border-bottom-0">Total Muatan</th>
                                 <th class="wd-15p border-bottom-0">Total Biaya</th>
-                                <th class="wd-20p border-bottom-0" width="150px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -67,7 +84,7 @@
                                 </td>
                                 <td>{{ $muatan." %" }}</td>
                                 <td>{{ 'Rp. '.number_format($biaya) }}</td>
-                                <td>
+                                <!-- <td>
                                     <a href="{{ route('editRole', $item->id) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
@@ -75,7 +92,7 @@
                                         <i class="fa fa-credit-card"></i> Input Barang
                                     </a>
                                     <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
-                                </td>
+                                </td> -->
                             </tr>
                             @endforeach
                         </tbody>
@@ -86,6 +103,9 @@
     </div>
 </div>
 @push('after-script')
+<script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
+<script src="{{ asset('/assets/js/select2.js') }}"></script>
+
 <script>
     function deleteConfirmation(id, name) {
         Swal.fire({

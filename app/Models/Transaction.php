@@ -15,11 +15,19 @@ class Transaction extends Model
         'city_id',
     ];
 
+    public function details(){
+        return $this->hasMany(DetailTransaction::class,'transaction_id');
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
 
     public function city(){
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class,'city_id');
+    }
+
+    public function zona(){
+        return $this->belongsTo(Zona::class,'zona_id');
     }
 }

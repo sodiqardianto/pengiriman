@@ -40,7 +40,43 @@
                             @enderror
                         </div>
                     </div>
-                    <div class=" row mb-2">
+                    <div class="row mb-2">
+                            <label for="kelurahan" class="col-md-4 form-label">Pilih Kelurahan</label>
+                            <div class="col-md-8">
+                            <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Pilih kelurahan">
+                                <option value="" selected disabled>Pilih Kelurahan</option>
+                                @foreach ($kelurahan as $item)
+                                    <option value="{{$item->village_id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
+                                @endforeach
+                            </select> 
+                            </div>
+                        </div>
+                        <div class="row">
+                        <div class="col-sm-4">
+                            <label for="harga25" class="form-label">25 %</label>
+                            <input type="text" class="form-control" id="harga25" name="harga25" placeholder="0" readonly>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="harga50" class="form-label">50 %</label>
+                            <input type="text" class="form-control" id="harga50" name="harga50" placeholder="0" readonly>
+                        </div>
+                        <div class="col-sm-4">
+                            <label for="harga100" class="form-label">100 %</label>
+                            <input type="text" class="form-control" id="harga100" name="harga100" placeholder="0" readonly>
+                        </div>
+                    </div>
+
+                        <!-- <div class=" row mb-2">
+                        <label for="no_telp" class="col-md-4 form-label">Total Harga</label>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control @error('no_telp') is-invalid state-invalid @enderror" id="no_telp" name="no_telp" placeholder="No. Telepon" value="{{ old('no_telp') }}">
+                            @error('no_telp')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div> -->
+
+                    <!-- <div class=" row mb-2">
                         <label for="provinsi" for="provinsi" class="col-md-4 form-label">Pilih Provinsi</label>
                         <div class="col-md-8">
                             <select class="form-control select2-show-search form-select @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" data-placeholder="Pilih Provinsi">
@@ -80,7 +116,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror 
                         </div>
-                    </div>
+                    </div> -->
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-8">
                             <button type="submit" class="btn btn-primary">Tambah</button>
@@ -120,26 +156,26 @@
     <!-- INTERNAL SELECT2 JS -->
     <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('/assets/js/select2.js') }}"></script>
-    {{-- <script type="text/javascript">
-    $('#zona').change(function() {
-        var kode = $('#zona').val();
+    <script type="text/javascript">
+    $('#kelurahan').change(function() {
+        var kode = $('#kelurahan').val();
         $.ajax({
             type: "GET",
-            url: "{{ route('price') }}",
+            url: "{{ route('priceCity') }}",
             data: {'id':kode},
             dataType: 'json',
             success: function(data) {
                 // console.log(data);
-                $('#harga25').val("Rp. " + data.harga25);
-                $('#harga50').val("Rp. " + data.harga50);
-                $('#harga100').val("Rp. " + data.harga100);
+                $('#harga25').val("Rp. " + data.zona.harga25);
+                $('#harga50').val("Rp. " + data.zona.harga50);
+                $('#harga100').val("Rp. " + data.zona.harga100);
             },
             error: function(response) {
                 alert(response.responseJSON.message);
             }
         })
     })
-    </script> --}}
+    </script> 
 
     {{-- <script type="text/javascript">
         function sum(){

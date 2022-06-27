@@ -74,7 +74,7 @@
                             class="angle fe fe-chevron-right"></i></a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)">Laporan</a></li>
-                        <li><a href="{{ 'zona' }}" class="slide-item"> Histori Transaksi</a></li>
+                        <li><a href="{{ 'report' }}" class="slide-item"> Histori Transaksi</a></li>
                     </ul>
                 </li>
             </ul>
