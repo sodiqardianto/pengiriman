@@ -16,6 +16,7 @@ class CreateTransactionsTable extends Migration
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->string('nama',25);
+            $table->string('no_telp',13);
             $table->foreignid('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignid('city_id')->references('id')->on('cities')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

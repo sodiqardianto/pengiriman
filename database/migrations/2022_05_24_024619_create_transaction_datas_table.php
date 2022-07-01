@@ -16,7 +16,7 @@ class CreateTransactionDatasTable extends Migration
         Schema::create('transaction_datas', function (Blueprint $table) {
             $table->id();
             $table->foreignid('transaction_id')->references('id')->on('transactions')->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('muatan',[1,2,3]);
+            $table->enum('muatan',[100,50,25]);
             $table->timestamps();
         });
     }

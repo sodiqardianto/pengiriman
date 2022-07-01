@@ -27,11 +27,11 @@
                     <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
                         <thead>
                             <tr>
-                                <th class="wd-15p border-bottom-0" width="50px">No</th>
-                                <th class="wd-15p border-bottom-0">Nama Customer</th>
-                                <th class="wd-15p border-bottom-0">Kota Tujuan</th>
-                                <th class="wd-15p border-bottom-0">Nama Petugas Input</th>
-                                <th class="wd-15p border-bottom-0">Total Surat Jalan</th>
+                            <th class="wd-15p border-bottom-0" width="50px">No</th>
+                                <th class="wd-15p border-bottom-0">Customer</th>
+                                <th class="wd-15p border-bottom-0">No Telpon</th>
+                                <th class="wd-15p border-bottom-0">Kelurahan</th>
+                                <th class="wd-15p border-bottom-0">Surat Jalan</th>
                                 <th class="wd-15p border-bottom-0">Total Muatan</th>
                                 <th class="wd-15p border-bottom-0">Total Biaya</th>
                                 <th class="wd-20p border-bottom-0" width="150px">Aksi</th>
@@ -43,7 +43,7 @@
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ ucwords($item->nama) }}</td>
                                 <td>{{ ucwords($item->city->kelurahan->name) }}</td>
-                                <td>{{ ucwords($item->user->name) }}</td>
+                                <td>{{ ucwords($item->no_telp) }}</td>
                                 <td>
                                     <?php
                                     $muatan=0;
@@ -131,4 +131,5 @@
     )}
 </script>
 @endpush
+
 @endsection

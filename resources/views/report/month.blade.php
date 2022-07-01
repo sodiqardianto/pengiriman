@@ -20,12 +20,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <div class="row mt-3" id="harian">
+                    <div class="row mt-3" id="bulan">
                         <div class="col-md-5">
                             <div class="row">
-                                <label for="tanggal" class="col-md-5">Pilih Tanggal</label>
+                                <label for="from_date" class="col-md-5">Pilih Bulan</label>
                                 <div class="col-md-7">
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal">
+                                    <input type="month" class="form-control" name="from_date" id="from_date">
                                 </div>
                             </div>
                         </div>
@@ -171,7 +171,9 @@
             });
             
             $('#filterharian').click(function(){  
-                
+                let tanggal = $("#tanggal").val();
+
+                alert(tanggal);
 
             });
 

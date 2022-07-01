@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ZonaController;
@@ -64,7 +65,10 @@ Route::get('/editTransaction/{transaction}', [TransactionController::class, 'edi
 Route::patch('/updateTransaction/{transaction}', [TransactionController::class, 'update'])->name('updateTransaction');
 Route::post('/deleteTransaction/{transaction}', [TransactionController::class, 'destroy'])->name('deleteTransaction');
 Route::get('/inputBarang/{barang}', [TransactionController::class, 'show'])->name('inputBarang');
-
+Route::get('/check', [TransactionController::class, 'check'])->name('check');
 
 // Report
-Route::get('/report', [TransactionController::class, 'report'])->name('report');
+Route::get('/reportHarian', [ReportController::class, 'report'])->name('reportHarian');
+Route::get('/reportMingguan', [ReportController::class, 'reportMingguan'])->name('reportMingguan');
+Route::get('/reportBulanan', [ReportController::class, 'reportBulanan'])->name('reportBulanan');
+Route::get('/dataReport', [ReportController::class, 'dataReport'])->name('dataReport');

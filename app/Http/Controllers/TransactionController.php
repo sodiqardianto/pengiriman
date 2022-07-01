@@ -43,6 +43,7 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $city = City::where('village_id',$request->kelurahan)->first();
         if($city==false){
             return redirect()->route('createTransaction')->with(['error' => 'Kelurahan Belum Terdaftar!']);
@@ -51,9 +52,9 @@ class TransactionController extends Controller
             [
                 'name' => 'required',
                 'no_telp' => 'required',
-                'provinsi'  => 'required',
-                'kabupaten'  => 'required',
-                'kecamatan'  => 'required',
+                // 'provinsi'  => 'required',
+                // 'kabupaten'  => 'required',
+                // 'kecamatan'  => 'required',
                 'kelurahan'  => 'required',
             ]
         );
@@ -63,6 +64,7 @@ class TransactionController extends Controller
         $input = Transaction::create([
             'nama'  =>  strtolower($request->name),
             'user_id' => Auth::user()->id,
+            'no_telp' => $request->no_telp,
             'city_id' => $city->id
         ]);
         
@@ -127,8 +129,12 @@ class TransactionController extends Controller
         //
     }
 
-    public function report(){
-        $transaction = Transaction::all();
-        return view('report.index', compact('transaction'));
+    public function check(Request $request){
+        $p = Transaction::where('no_telp', $request->id)->first();
+        return response()->json($p);
     }
+
+    
+
+    
 }

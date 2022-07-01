@@ -22,20 +22,23 @@
         <div class="col-md-12 col-xl-6">
             <div class="card">
                 <div class="card-body">
-                    <div class=" row mb-2">
-                        <label for="inputName" class="col-md-4 form-label">Nama Customer</label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control @error('name') is-invalid state-invalid @enderror" id="inputName" name="name" placeholder="Nama Customer" value="{{ old('name') }}">
-                            @error('name')
+                <div class=" row mb-2">
+                        <label for="no_telp" class="col-md-4 form-label">No. Telepon</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control @error('no_telp') is-invalid state-invalid @enderror" id="no_telp" name="no_telp" placeholder="No. Telepon" value="{{ old('no_telp') }}">
+                            @error('no_telp')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="col-md-1">
+                        <button type="button" name='check' id='check' class="btn btn-success">Check</button>
+                        </div>
                     </div>
                     <div class=" row mb-2">
-                        <label for="no_telp" class="col-md-4 form-label">No. Telepon</label>
+                        <label for="inputName" class="col-md-4 form-label">Nama Customer</label>
                         <div class="col-md-8">
-                            <input type="number" class="form-control @error('no_telp') is-invalid state-invalid @enderror" id="no_telp" name="no_telp" placeholder="No. Telepon" value="{{ old('no_telp') }}">
-                            @error('no_telp')
+                            <input type="text" class="form-control @error('name') is-invalid state-invalid @enderror" id="name" name="name" placeholder="Nama Customer" value="{{ old('name') }}">
+                            @error('name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
@@ -46,7 +49,7 @@
                             <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Pilih kelurahan">
                                 <option value="" selected disabled>Pilih Kelurahan</option>
                                 @foreach ($kelurahan as $item)
-                                    <option value="{{$item->village_id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
+                                    <option value="{{$item->id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
                                 @endforeach
                             </select> 
                             </div>
@@ -175,6 +178,7 @@
             }
         })
     })
+    
     </script> 
 
     {{-- <script type="text/javascript">
@@ -189,6 +193,8 @@
             document.getElementById('totalmobil').value=d;
             
         }
+      
+        
 
         $('#totalharga').click(function() {
         let kode = $('#kota').val();
@@ -321,6 +327,31 @@
                     }
                 })
             })
+            $('#check').click(function(){
+                var kode = $('#no_telp').val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ route('check') }}",
+                    data: {'id':kode},
+                    dataType: 'json',
+                    success: function(data) {
+                        // console.log(data);
+                        $('#name').val(data.nama);
+                        $('#kelurahan').val(data.city_id).trigger('change');
+                        // $('#harga50').val("Rp. " + data.zona.harga50);
+                        // $('#harga100').val("Rp. " + data.zona.harga100);
+                    },
+                    error: function(response) {
+                        toastr.error("Masukan Nomor Telepon/Nomor Telepon Belum Pernah Melakukan Transaksi");
+                    }
+        })
+                
+            })
         })
     </script>
     @endpush
+    @push('after-script')
+<script>
+   
+</script>
+@endpush

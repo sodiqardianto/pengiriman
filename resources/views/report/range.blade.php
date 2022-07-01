@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Report')
+@section('title', 'Report Mingguan')
 
 @section('content')
 
@@ -20,17 +20,26 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <div class="row mt-3" id="harian">
+                    <div class="row mt-3" id="range">
                         <div class="col-md-5">
                             <div class="row">
-                                <label for="tanggal" class="col-md-5">Pilih Tanggal</label>
+                                <label for="from_date" class="col-md-5">From Date</label>
                                 <div class="col-md-7">
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal">
+                                    <input type="date" class="form-control" name="from_date" id="from_date">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2"><button type="button" name='filterharian' id='filterharian' class="btn btn-success">Filter</button>&nbsp;<button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button></div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <label for="from_date" class="col-md-5">End Date</label>
+                                <div class="col-md-7">
+                                    <input type="date" class="form-control" name="from_date" id="from_date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2"><button type="button" name='filter' id='filter' class="btn btn-success">Filter</button>&nbsp;<button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button></div>
                     </div>
+
 
                 </div>
             </div>
@@ -171,7 +180,17 @@
             });
             
             $('#filterharian').click(function(){  
-                
+                var from_date = $('#from_date').val();
+                var to_date = $('#to_date').val();
+                if(from_date != '' &&  to_date != '')
+                {
+                $('#table').DataTable().destroy();
+                load_data(from_date, to_date);
+                }
+                else
+                {
+                alert('Both Date is required');
+                }
 
             });
 

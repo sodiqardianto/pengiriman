@@ -11,6 +11,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'nama',
+        'no_telp',
         'user_id',
         'city_id',
     ];

@@ -74,7 +74,9 @@
                             class="angle fe fe-chevron-right"></i></a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="javascript:void(0)">Laporan</a></li>
-                        <li><a href="{{ 'report' }}" class="slide-item"> Histori Transaksi</a></li>
+                        <li><a href="{{ 'reportHarian' }}" class="slide-item"> Laporan Harian</a></li>
+                        <li><a href="{{ 'reportMingguan' }}" class="slide-item"> Laporan Mingguan</a></li>
+                        <li><a href="{{ 'reportBulanan' }}" class="slide-item"> Laporan Bulanan</a></li>
                     </ul>
                 </li>
             </ul>

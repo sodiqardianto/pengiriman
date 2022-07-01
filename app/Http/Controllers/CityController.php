@@ -182,7 +182,7 @@ class CityController extends Controller
 
     public function pricecity(Request $request)
     {
-        $p = City::with('zona')->where('village_id', $request->id)->first();
+        $p = City::with('zona')->where('id', $request->id)->first();
         return response()->json($p);
     }
 
