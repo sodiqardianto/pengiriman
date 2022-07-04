@@ -44,17 +44,32 @@
                         </div>
                     </div>
                     <div class="row mb-2">
-                            <label for="kelurahan" class="col-md-4 form-label">Pilih Kelurahan</label>
-                            <div class="col-md-8">
-                            <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Pilih kelurahan">
+                        <div class="col-md-4">
+                            <label for="kecamatan" class="form-label">Pilih Kecamatan</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control select2-show-search form-select" id="kecamatan" name="kecamatan" data-placeholder="Pilih Kecamatan">
+                                <option value="" selected disabled>Pilih Kecamatan</option>
+                                @foreach ($kelurahan as $item)
+                                    <option value="{{$item->id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
+                                @endforeach
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                            <label for="kelurahan" class="form-label">Pilih Kelurahan</label>
+                        </div>
+                        <div class="col-md-8">
+                            <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Pilih Kelurahan">
                                 <option value="" selected disabled>Pilih Kelurahan</option>
                                 @foreach ($kelurahan as $item)
                                     <option value="{{$item->id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
                                 @endforeach
                             </select> 
-                            </div>
                         </div>
-                        <div class="row">
+                    </div>
+                    <div class="row mb-2">
                         <div class="col-sm-4">
                             <label for="harga25" class="form-label">25 %</label>
                             <input type="text" class="form-control" id="harga25" name="harga25" placeholder="0" readonly>
@@ -68,62 +83,12 @@
                             <input type="text" class="form-control" id="harga100" name="harga100" placeholder="0" readonly>
                         </div>
                     </div>
-
-                        <!-- <div class=" row mb-2">
-                        <label for="no_telp" class="col-md-4 form-label">Total Harga</label>
-                        <div class="col-md-8">
-                            <input type="number" class="form-control @error('no_telp') is-invalid state-invalid @enderror" id="no_telp" name="no_telp" placeholder="No. Telepon" value="{{ old('no_telp') }}">
-                            @error('no_telp')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div> -->
-
-                    <!-- <div class=" row mb-2">
-                        <label for="provinsi" for="provinsi" class="col-md-4 form-label">Pilih Provinsi</label>
-                        <div class="col-md-8">
-                            <select class="form-control select2-show-search form-select @error('provinsi') is-invalid @enderror" id="provinsi" name="provinsi" data-placeholder="Pilih Provinsi">
-                                <option label="Pilih"></option>
-                                @foreach ($provinsi as $item)
-                                    <option value="{{$item->id}}">{{ucwords($item->name)}}</option>
-                                @endforeach
-                            </select> 
-                            @error('provinsi')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror 
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="kabupaten" for="kabupaten" class="form-label col-md-4">Pilih Kota/Kabupaten</label>
-                        <div class="col-md-8">
-                            <select class="form-control select2-show-search form-select @error('kabupaten') is-invalid @enderror" id="kabupaten" name="kabupaten" data-placeholder="Pilih Kota/Kabupaten"></select> 
-                            @error('kabupaten')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror 
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                        <label for="kecamatan" for="kecamatan" class="form-label col-md-4">Pilih Kecamatan</label>
-                        <div class="col-md-8">
-                            <select class="form-control select2-show-search form-select @error('kecamatan') is-invalid @enderror" id="kecamatan" name="kecamatan" data-placeholder="Pilih Kecamatan"></select> 
-                            @error('kecamatan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror 
-                        </div>
-                    </div>
-                    <div class="row mb-2">
-                            <label for="kelurahan" for="kelurahan" class="form-label col-md-4">Pilih Kelurahan</label>
-                        <div class="col-md-8">
-                            <select class="form-control select2-show-search form-select @error('kelurahan') is-invalid @enderror" id="kelurahan" name="kelurahan" data-placeholder="Pilih Kelurahan"></select> 
-                            @error('kelurahan')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror 
-                        </div>
-                    </div> -->
-                    <div class="mb-0 mt-4 row justify-content-end">
-                        <div class="col-md-8">
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                            <a href="/transaction" class="btn btn-secondary">Kembali</a>
+                    <div class="row mt-2">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <a href="/transaction" class="btn btn-secondary">Kembali</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,7 +124,7 @@
     <!-- INTERNAL SELECT2 JS -->
     <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
     <script src="{{ asset('/assets/js/select2.js') }}"></script>
-    <script type="text/javascript">
+    <script>
     $('#kelurahan').change(function() {
         var kode = $('#kelurahan').val();
         $.ajax({
@@ -178,49 +143,7 @@
             }
         })
     })
-    
     </script> 
-
-    {{-- <script type="text/javascript">
-        function sum(){
-            
-            let a = document.getElementById('total100').value;
-            let b = document.getElementById('total50').value;
-            let c = document.getElementById('total25').value;
-            
-            let d = parseInt(a)+parseInt(b)+parseInt(c);
-            
-            document.getElementById('totalmobil').value=d;
-            
-        }
-      
-        
-
-        $('#totalharga').click(function() {
-        let kode = $('#kota').val();
-        let total100 = $('#total100').val();
-        let total50 = $('#total50').val();
-        let total25 = $('#total25').val();
-        $.ajax({
-            type: "GET",
-            url: "{{ route('totalharga') }}",
-            data: {
-                'id':kode,
-                'total100':total100,
-                'total50':total50,
-                'total25':total25
-            },
-            dataType: 'json',
-            success: function(data) {
-                // console.log(data);
-                $('#totalharga').val(data);
-            },
-            error: function(response) {
-                alert(response.responseJSON.message);
-            }
-        })
-    })
-    </script> --}}
 
     <script>
         $(document).ready(function(){
@@ -344,14 +267,8 @@
                     error: function(response) {
                         toastr.error("Masukan Nomor Telepon/Nomor Telepon Belum Pernah Melakukan Transaksi");
                     }
-        })
-                
+                })
             })
         })
     </script>
-    @endpush
-    @push('after-script')
-<script>
-   
-</script>
 @endpush

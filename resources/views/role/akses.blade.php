@@ -31,12 +31,6 @@
                             @enderror
                         </div>
                     </div>
-                    {{-- <div class="mb-0 mt-4 row justify-content-end">
-                        <div class="col-md-9">
-                            <button class="btn btn-primary">Tambah Role</button>
-                            <a href="/role" class="btn btn-secondary">Kembali</a>
-                        </div>
-                    </div> --}}
                 </form>
             </div>
         </div>
@@ -46,7 +40,7 @@
     <div class="col-md-12 col-xl-12">
         <div class="card">
             <div class="card-body">
-                <form class="form-horizontal" action="{{ route('storeRole') }}" method="POST">
+                <form class="form-horizontal" action="{{ route('updateRole', $role->id) }}" method="POST">
                     @csrf
                     <div class=" row mb-4">
                         <label for="inputName" class="col-md-12 form-label">Permission</label>
@@ -56,7 +50,7 @@
                         <div class="col-md-3 my-5">
                             @foreach ($item as $v)
                             <label>
-                                <input type="checkbox" class="form-checked" name="permission" {{ in_array($v->name, $rolePermissions) ? "checked" : null }}> {{ $v->name }}
+                                <input type="checkbox" class="form-checked" name="permission[]" value="{{ $v->name }}" {{ in_array($v->name, $rolePermissions) ? "checked" : null }}> {{ $v->name }}
                             </label>
                             <br/>
                             @endforeach
@@ -66,7 +60,7 @@
                         @endforelse
                     <div class="mb-0 mt-4 row justify-content-end">
                         <div class="col-md-12">
-                            <button class="btn btn-primary">Tambah Role</button>
+                            <button class="btn btn-primary">Perbarui Permission</button>
                             <a href="/role" class="btn btn-secondary">Kembali</a>
                         </div>
                     </div>

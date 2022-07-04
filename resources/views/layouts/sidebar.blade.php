@@ -60,7 +60,7 @@
                     <h3>Transaksi</h3>
                 </li>
                 <li class="slide">
-                    <a class="side-menu__item @if (Request::segment(1) == 'transaksi') active @endif" data-bs-toggle="slide" href="/transaction"><i
+                    <a class="side-menu__item @if (Request::segment(1) == 'transaction' || Request::segment(1) == 'createTransaction') active @endif" data-bs-toggle="slide" href="/transaction"><i
                             class="side-menu__icon fe fe-book"></i><span
                             class="side-menu__label active">Transaksi</span></a>
                 </li>

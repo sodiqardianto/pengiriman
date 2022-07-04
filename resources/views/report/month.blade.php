@@ -20,18 +20,23 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <div class="row mt-3" id="bulan">
-                        <div class="col-md-5">
-                            <div class="row">
-                                <label for="from_date" class="col-md-5">Pilih Bulan</label>
-                                <div class="col-md-7">
-                                    <input type="month" class="form-control" name="from_date" id="from_date">
-                                </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="from_date">Pilih Bulan</label>
                             </div>
                         </div>
-                        <div class="col-md-2"><button type="button" name='filterharian' id='filterharian' class="btn btn-success">Filter</button>&nbsp;<button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="month" class="form-control" name="from_date" id="from_date">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3">
+                                <button type="button" name='filterharian' id='filterharian' class="btn btn-success">Filter</button>
+                                <button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -77,8 +82,10 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                // dom:'Bfrtip',
-                buttons: [ 'excel'],
+                lengthChange: false,
+                autoWidth: false,
+                lengthChange: true,
+                lengthMenu: [10, 25, 50, 100],
                 ajax: {
                     url: "{{ ('dataReport') }}",
                     type: "GET",

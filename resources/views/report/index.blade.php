@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Report')
+@section('title', 'Report Harian')
 
 @section('content')
 
@@ -20,18 +20,23 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <div class="row mt-3" id="harian">
-                        <div class="col-md-5">
-                            <div class="row">
-                                <label for="tanggal" class="col-md-5">Pilih Tanggal</label>
-                                <div class="col-md-7">
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal">
-                                </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="tanggal">Pilih Tanggal</label>
                             </div>
                         </div>
-                        <div class="col-md-2"><button type="button" name='filterharian' id='filterharian' class="btn btn-success">Filter</button>&nbsp;<button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button></div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="date" class="form-control" name="tanggal" id="tanggal">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-3">
+                                <button type="button" name='filterharian' id='filterharian' class="btn btn-success">Filter</button>
+                                <button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -77,8 +82,14 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                // dom:'Bfrtip',
-                buttons: [ 'excel'],
+                lengthChange: false,
+                autoWidth: false,
+                lengthChange: true,
+                dom:
+                "<'row'<'col-sm-1'l><'col-sm-8 pb-3 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                lengthMenu: [10, 25, 50, 100],
                 ajax: {
                     url: "{{ ('dataReport') }}",
                     type: "GET",
@@ -122,22 +133,6 @@
                         data: 'biaya',
                         name: 'biaya'
                     }
-                    // ,
-                    // {
-                    //     data: 'id',
-                    //     name: 'id',
-                    //     render: function(value, param, data) {
-                    //         return '<div class="btn-group">' +
-                    //             '<a class="btn btn-sm btn-primary" href="/editCity/' + value +
-                    //             '"><i class="fa fa-edit"></i></a> ' +
-
-                    //             '<button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirmation(' +
-                    //             value + ')"><i class="fa fa-trash"></i></button>' +
-                    //             '</div> ';
-                    //     },
-                    //     orderable: false,
-                    // }
-
                 ],
                 order: [
                     [0, 'asc']

@@ -20,27 +20,29 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12">
-                    <div class="row mt-3" id="range">
-                        <div class="col-md-5">
                             <div class="row">
-                                <label for="from_date" class="col-md-5">From Date</label>
-                                <div class="col-md-7">
+                                <div class="col-md-3">
+                                    <label for="from_date">From Date</label>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="from_date">End Date</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <input type="date" class="form-control" name="from_date" id="from_date">
+                                </div>
+                                <div class="col-md-3">
                                     <input type="date" class="form-control" name="from_date" id="from_date">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="row">
-                                <label for="from_date" class="col-md-5">End Date</label>
-                                <div class="col-md-7">
-                                    <input type="date" class="form-control" name="from_date" id="from_date">
+                            <div class="row mt-2">
+                                <div class="col-md-3">
+                                    <button type="button" name='filter' id='filter' class="btn btn-success">Filter</button>
+                                    <button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2"><button type="button" name='filter' id='filter' class="btn btn-success">Filter</button>&nbsp;<button type="button" name='reset' id='reset' class="btn btn-danger">Reset</button></div>
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -86,8 +88,10 @@
                 processing: true,
                 serverSide: true,
                 responsive: true,
-                // dom:'Bfrtip',
-                buttons: [ 'excel'],
+                lengthChange: false,
+                autoWidth: false,
+                lengthChange: true,
+                lengthMenu: [10, 25, 50, 100],
                 ajax: {
                     url: "{{ ('dataReport') }}",
                     type: "GET",

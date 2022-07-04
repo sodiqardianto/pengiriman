@@ -26,9 +26,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 // Role
 Route::get('/role', [RoleController::class, 'index'])->name('role');
 Route::get('/createRole', [RoleController::class, 'create'])->name('createRole');
+Route::get('/createPermission', [RoleController::class, 'createPermission'])->name('createPermission');
+Route::post('/insertPermission', [RoleController::class, 'insertPermission'])->name('insertPermission');
 Route::post('/storeRole', [RoleController::class, 'store'])->name('storeRole');
 Route::get('/editRole/{role}', [RoleController::class, 'edit'])->name('editRole');
-Route::patch('/updateRole/{role}', [RoleController::class, 'update'])->name('updateRole');
+Route::post('/updateRole/{role}', [RoleController::class, 'update'])->name('updateRole');
 Route::post('/deleteRole/{role}', [RoleController::class, 'destroy'])->name('deleteRole');
 Route::get('/aksesRole/{role}', [RoleController::class, 'show'])->name('aksesRole');
 

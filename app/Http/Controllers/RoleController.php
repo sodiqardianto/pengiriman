@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Carbon\Carbon;
 
 class RoleController extends Controller
 {
@@ -28,6 +29,45 @@ class RoleController extends Controller
     public function create()
     {
         return view('role.create');
+    }
+
+    public function createPermission()
+    {
+        return view('role.createPermission');
+    }
+
+    public function insertPermission(Request $request, Role $role)
+    {
+        $data = array(
+            'create' . '-' . $request->permission,
+            'read' . '-' . $request->permission,
+            'update' . '-' . $request->permission,
+            'delete' . '-' . $request->permission,
+        );
+
+        $request->validate(
+            [
+                'permission'  =>  'required',
+            ]
+        );
+
+        for ($i = 0; $i < count($data); $i++) {
+            $answers[] = [
+                'name'  =>  strtolower($data[$i]),
+                'guard_name'  =>  'web',
+                'created_at'  =>  Carbon::now(),
+                'updated_at'  =>  Carbon::now(),
+            ];
+        }
+        $input = Permission::insert($answers);
+
+        if ($input) {
+            //redirect dengan pesan sukses
+            return redirect()->route('role')->with(['success' => 'Data Berhasil Diperbarui!']);
+        } else {
+            //redirect dengan pesan error
+            return redirect()->route('role')->with(['error' => 'Data Gagal Diperbarui!']);
+        }
     }
 
     /**
@@ -89,24 +129,22 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
         $request->validate(
             [
-                'name'  =>  'required|unique:roles,name'
+                'permission'  =>  'required'
             ]
         );
 
-        $input = Role::find($id)->update([
-            'name' => $request->name
-        ]);
+        $role->syncPermissions($request->permission);
 
-        if ($input) {
+        if ($role) {
             //redirect dengan pesan sukses
-            return redirect()->route('editRole', $id)->with(['success' => 'Data Berhasil Diperbarui!']);
+            return redirect()->route('aksesRole', $role->id)->with(['success' => 'Data Berhasil Diperbarui!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('editRole', $id)->with(['error' => 'Data Gagal Diperbarui!']);
+            return redirect()->route('aksesRole', $role->id)->with(['error' => 'Data Gagal Diperbarui!']);
         }
     }
 

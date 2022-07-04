@@ -20,7 +20,12 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ 'createRole' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Role</a>
+                <div class="form-group">
+                    @can('create-role')
+                    <a href="{{ 'createRole' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Role</a>
+                    @endcan
+                    <a href="{{ 'createPermission' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Permission</a>
+                </div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -33,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($role as $no => $item)
+                            @forelse ($role as $no => $item)
                             <tr>
                                 <td>{{ $no+1 }}</td>
                                 <td>{{ $item->name }}</td>
@@ -47,7 +52,11 @@
                                     <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
                                 </td>
                             </tr>
-                            @endforeach
+                            @empty
+                                <tr>
+                                    <td>No Data Availabel</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
