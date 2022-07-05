@@ -43,7 +43,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row mb-2">
+                    <!-- <div class="row mb-2">
                         <div class="col-md-4">
                             <label for="kecamatan" class="form-label">Pilih Kecamatan</label>
                         </div>
@@ -55,7 +55,7 @@
                                 @endforeach
                             </select> 
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row mb-2">
                         <div class="col-md-4">
                             <label for="kelurahan" class="form-label">Pilih Kelurahan</label>

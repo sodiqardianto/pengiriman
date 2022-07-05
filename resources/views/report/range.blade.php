@@ -25,7 +25,7 @@
                                     <label for="from_date">From Date</label>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="from_date">End Date</label>
+                                    <label for="end_date">End Date</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -33,7 +33,7 @@
                                     <input type="date" class="form-control" name="from_date" id="from_date">
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="date" class="form-control" name="from_date" id="from_date">
+                                    <input type="date" class="form-control" name="end_date" id="end_date">
                                 </div>
                             </div>
                             <div class="row mt-2">
@@ -67,7 +67,15 @@
                                 <th class="wd-15p border-bottom-0">Total Biaya</th>
                             </tr>
                         </thead>
-                        
+                        <tfoot>
+                            <tr>
+                                <th colspan="4"></th>
+                                <th style="text-align:right">Total Surat Jalan:</th>
+                                <th></th>
+                                <th style="text-align:right">Total Biaya:</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>
@@ -81,7 +89,7 @@
         (function() {
         loadDataTable();
     })();
-    function loadDataTable(from_date = '', to_date = '') {
+    function loadDataTable(from_date = '', to_date = '',tipe='range') {
         $(document).ready(function() {
             $('#responsive-datatable').DataTable({
                 destroy: true,
@@ -91,10 +99,18 @@
                 lengthChange: false,
                 autoWidth: false,
                 lengthChange: true,
+                dom:
+                "<'row'<'col-sm-1'l><'col-sm-8 pb-3 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                buttons:[{extend: 'excel',title:"<center>Data Harian</center>", footer: true},
+                {extend: 'pdf',title:"<center>Data Harian</center>", footer: true},
+                {extend: 'print',title:"<center>Data Harian</center>", footer: true}],
                 lengthMenu: [10, 25, 50, 100],
                 ajax: {
                     url: "{{ ('dataReport') }}",
                     type: "GET",
+                    data:{from_date:from_date, to_date:to_date, tipe:tipe}
                 },
                 columns: [{
                         data: "DT_RowIndex",
@@ -135,23 +151,40 @@
                         data: 'biaya',
                         name: 'biaya'
                     }
-                    // ,
-                    // {
-                    //     data: 'id',
-                    //     name: 'id',
-                    //     render: function(value, param, data) {
-                    //         return '<div class="btn-group">' +
-                    //             '<a class="btn btn-sm btn-primary" href="/editCity/' + value +
-                    //             '"><i class="fa fa-edit"></i></a> ' +
-
-                    //             '<button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirmation(' +
-                    //             value + ')"><i class="fa fa-trash"></i></button>' +
-                    //             '</div> ';
-                    //     },
-                    //     orderable: false,
-                    // }
-
                 ],
+                
+                    "footerCallback": function (row, data){
+                        var api = this.api(),data;
+                        var intVal = function (i) {
+                            return typeof i === 'string' ? i.replace(/[\Rp. ,]/g, '') * 1 : typeof i === 'number' ? i : 0;
+                        };
+
+                        total = api.column(7)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                        totalsurat = api.column(5)
+                        .data()
+                        .reduce(function (a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0)
+
+                        for(let j=0;j<4;j++){
+                            $(api.column(j).footer()).html(
+                            ""
+                        )
+                        }
+                        $(api.column(5).footer()).html(
+                            totalsurat
+                        )
+                        $(api.column(7).footer()).html(
+                            "Rp. "+total
+                        )
+                            },
+                
+
                 order: [
                     [0, 'asc']
                 ],
@@ -160,36 +193,25 @@
     }
     
     $(document).ready(function(){
-            $('#pilihfilter').change(function(){  
-                // alert('oke')
-                let filter = $('#pilihfilter').val();
-                if(filter=='range'){
-                    document.getElementById("harian").style.display='none'; 
-                    document.getElementById("range").style.display='block';
-                    document.getElementById("bulan").style.display='none'; 
-                }else if(filter=='harian'){
-                    document.getElementById("harian").style.display='block'; 
-                    document.getElementById("range").style.display='none';
-                    document.getElementById("bulan").style.display='none';  
-                }else if(filter=='bulan'){
-                    document.getElementById("bulan").style.display='block';
-                    document.getElementById("range").style.display='none';
-                    document.getElementById("harian").style.display='none'; 
-                }else{
-                    document.getElementById("bulan").style.display='none';
-                    document.getElementById("range").style.display='none';
-                    document.getElementById("harian").style.display='none'; 
-                }
-                
-            });
             
-            $('#filterharian').click(function(){  
+            $('#from_date').change(function(){ 
+                let from_date =new Date($('#from_date').val());
+                from_date.setDate(from_date.getDate()+6); 
+                // let minggu = from_date.add(7).day();
+                newdate = new Date(from_date)
+                $('#end_date').val(newdate.toISOString().split('T')[0]);
+
+            });
+
+
+            
+            $('#filter').click(function(){  
                 var from_date = $('#from_date').val();
-                var to_date = $('#to_date').val();
+                var to_date = $('#end_date').val();
                 if(from_date != '' &&  to_date != '')
                 {
-                $('#table').DataTable().destroy();
-                load_data(from_date, to_date);
+                $('#responsive-datatable').DataTable().destroy();
+                loadDataTable(from_date, to_date);
                 }
                 else
                 {
@@ -199,9 +221,10 @@
             });
 
             $('#reset').click(function(){
-                $('#pilihfilter').val("").trigger('change');
-                $('#responsive_table').DataTable().destroy();
-                // load_data();
+                $('#from_date').val("");
+                $('#end_date').val("");
+                $('#responsive-datatable').DataTable().destroy();
+                loadDataTable();
             });
     })
     

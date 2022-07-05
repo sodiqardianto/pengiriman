@@ -57,9 +57,20 @@ class ReportController extends Controller
         if (request()->ajax()) {
 
             if (!empty($request->from_date)) {
-                $data = Transaction::whereDate('created_at', '>=', $request->from_date)
+                if($request->tipe=="range"){
+                    $data = Transaction::whereDate('created_at', '>=', $request->from_date)
                     ->whereDate('created_at', '<=', $request->to_date)
                     ->get();
+                }else if($request->tipe=="month"){
+                    $tahun = explode("-",$request->from_date);
+                    $data = Transaction::whereMonth('created_at', '=', $tahun[1])
+                    ->whereYear('created_at', '=', $tahun[0])
+                    ->get();
+                }else if($request->tipe=="daily"){
+                    $data = Transaction::whereDate('created_at', '=', $request->from_date)
+                    ->get();
+                }
+                
             } else {
                 $data = Transaction::all();
             }

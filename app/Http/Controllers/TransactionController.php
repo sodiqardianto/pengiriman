@@ -20,6 +20,7 @@ class TransactionController extends Controller
     public function index()
     {
         $transaction = Transaction::whereDate('created_at','=',date('Y-m-d'))->get();
+        // $transaction = Transaction::all();
         return view('transaction.index', compact('transaction'));
     }
 
