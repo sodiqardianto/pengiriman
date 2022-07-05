@@ -45,7 +45,7 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $city = City::where('village_id',$request->kelurahan)->first();
+        $city = City::where('id',$request->kelurahan)->first();
         if($city==false){
             return redirect()->route('createTransaction')->with(['error' => 'Kelurahan Belum Terdaftar!']);
         }
