@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:read-laporan|create-laporan|update-laporan|delete-laporan', ['only' => ['report', 'reportMingguan', 'reportBulanan']]);
+        $this->middleware('permission:create-laporan', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-laporan', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-laporan', ['only' => ['destroy']]);
+    }
+
     public function report()
     {
         $transaction = Transaction::all();
@@ -57,20 +65,19 @@ class ReportController extends Controller
         if (request()->ajax()) {
 
             if (!empty($request->from_date)) {
-                if($request->tipe=="range"){
+                if ($request->tipe == "range") {
                     $data = Transaction::whereDate('created_at', '>=', $request->from_date)
-                    ->whereDate('created_at', '<=', $request->to_date)
-                    ->get();
-                }else if($request->tipe=="month"){
-                    $tahun = explode("-",$request->from_date);
+                        ->whereDate('created_at', '<=', $request->to_date)
+                        ->get();
+                } else if ($request->tipe == "month") {
+                    $tahun = explode("-", $request->from_date);
                     $data = Transaction::whereMonth('created_at', '=', $tahun[1])
-                    ->whereYear('created_at', '=', $tahun[0])
-                    ->get();
-                }else if($request->tipe=="daily"){
+                        ->whereYear('created_at', '=', $tahun[0])
+                        ->get();
+                } else if ($request->tipe == "daily") {
                     $data = Transaction::whereDate('created_at', '=', $request->from_date)
-                    ->get();
+                        ->get();
                 }
-                
             } else {
                 $data = Transaction::all();
             }

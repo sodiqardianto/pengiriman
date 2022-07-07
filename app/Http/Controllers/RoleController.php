@@ -10,6 +10,14 @@ use Carbon\Carbon;
 
 class RoleController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:read-role|create-role|update-role|delete-role', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-role', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-role', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-role', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *

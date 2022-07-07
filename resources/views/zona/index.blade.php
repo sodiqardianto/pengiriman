@@ -49,7 +49,9 @@
                                     <a href="{{ route('editZona', $item->id) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
+                                    @can('delete-zona')
+                                        <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

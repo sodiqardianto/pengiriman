@@ -50,7 +50,10 @@
                         <div class="col-md-3 my-5">
                             @foreach ($item as $v)
                             <label>
-                                <input type="checkbox" class="form-checked" name="permission[]" value="{{ $v->name }}" {{ in_array($v->name, $rolePermissions) ? "checked" : null }}> {{ $v->name }}
+                                <input type="checkbox"
+                                class="form-checked"
+                                name="permission[]"
+                                value="{{ $v->name }}" {{ in_array($v->name, $rolePermissions) ? "checked" : null }}> {{ $v->name }}
                             </label>
                             <br/>
                             @endforeach

@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title', 'Transaksi')
+@section('title', 'Users')
 
 @section('content')
 
@@ -20,61 +20,34 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <a href="{{ 'createTransaction' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah Transaksi</a>
+                <a href="{{ 'users/create' }}" type="button" class="btn btn-primary"><i class="fe fe-plus me-2"></i>Tambah User</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered text-nowrap border-bottom" id="responsive-datatable">
                         <thead>
                             <tr>
-                            <th class="wd-15p border-bottom-0" width="50px">No</th>
-                                <th class="wd-15p border-bottom-0">Customer</th>
-                                <th class="wd-15p border-bottom-0">No Telpon</th>
-                                <th class="wd-15p border-bottom-0">Kelurahan</th>
-                                <th class="wd-15p border-bottom-0">Surat Jalan</th>
-                                <th class="wd-15p border-bottom-0">Total Muatan</th>
-                                <th class="wd-15p border-bottom-0">Total Biaya</th>
+                                <th class="wd-15p border-bottom-0" width="50px">No</th>
+                                <th class="wd-15p border-bottom-0">Nama Lengkap</th>
+                                <th class="wd-15p border-bottom-0">Jabatan</th>
+                                <th class="wd-15p border-bottom-0">No. Telepon</th>
+                                <th class="wd-15p border-bottom-0">Alamat</th>
                                 <th class="wd-20p border-bottom-0" width="150px">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($transaction as $no => $item)
+                            @foreach ($users as $no => $item)
                             <tr>
                                 <td>{{ $no+1 }}</td>
-                                <td>{{ ucwords($item->nama) }}</td>
-                                <td>{{ ucwords($item->city->kelurahan->name) }}</td>
-                                <td>{{ ucwords($item->no_telp) }}</td>
+                                <td>{{ ucwords($item->name) }}</td>
+                                <td>{{ ucwords($item->jabatan) }}</td>
+                                <td>{{ $item->no_telp }}</td>
+                                <td>{{ ucwords($item->alamat) }}</td>
                                 <td>
-                                    <?php
-                                    $muatan=0;
-                                    $biaya=0;
-                                    $surat=0;
-                                        foreach ($item->details as $details ) {
-                                            $muatan += $details->muatan;
-                                            if($details->muatan==25){
-                                                $biaya +=$item->city->zona->harga25;
-                                            }else if($details->muatan==50){
-                                                $biaya +=$item->city->zona->harga50;
-                                            }else{
-                                                $biaya +=$item->city->zona->harga100;
-                                            }
-                                            $surat++;
-                                        }
-                                        
-                                        echo $surat; 
-                                    ?>
-                                    
-                                </td>
-                                <td>{{ $muatan." %" }}</td>
-                                <td>{{ 'Rp. '.number_format($biaya) }}</td>
-                                <td>
-                                    {{-- <a href="{{ route('editRole', $item->id) }}" class="btn btn-warning btn-sm">
+                                    <a href="{{ route('editZona', $item->id) }}" class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit
-                                    </a> --}}
-                                    <a href="{{ route('cetak', $item->id) }}" target="__BLANK" class="btn btn-primary btn-sm">
-                                        <i class="fa fa-print"></i> Cetak
                                     </a>
-                                    @can('delete-transaksi')
+                                    @can('delete-zona')
                                         <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
                                     @endcan
                                 </td>
@@ -87,13 +60,13 @@
         </div>
     </div>
 </div>
-@push('after-script')
+{{-- @push('after-script')
 <script>
     function deleteConfirmation(id, name) {
         Swal.fire({
-            title: "Hapus Transaksi?",
+            title: "Hapus Zona?",
             icon: 'error',
-            text: "Apakah kamu ingin menghapus role! ",
+            text: "Apakah kamu ingin menghapus zona! ",
             showCancelButton: !0,
             confirmButtonText: "Hapus",
             cancelButtonText: "Cancel",
@@ -104,7 +77,7 @@
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 
                 $.ajax({
-                    url: "{{url('/deleteTransaksi')}}/" + id,
+                    url: "{{url('/deleteZona')}}/" + id,
                     type: 'POST',
                     data: {_token: CSRF_TOKEN},
                     dataType: 'json',
@@ -112,7 +85,7 @@
                         if (results.success === true) {
                             Swal.fire(
                                 'Deleted!',
-                                'Transaksi berhasil dihapus.',
+                                'Zona berhasil dihapus.',
                                 'success'
                             )
                             // refresh page after 2 seconds
@@ -132,6 +105,5 @@
         }
     )}
 </script>
-@endpush
-
+@endpush --}}
 @endsection

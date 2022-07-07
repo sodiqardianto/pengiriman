@@ -38,23 +38,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @foreach ($city as $no => $item)
-                            <tr>
-                                <td>{{ $no+1 }}</td>
-                                <td>{{ ucwords($item->zona->zona) }}</td>
-                                <td>{{ ucwords($item->kelurahan->district->regency->province->name) }}</td>
-                                <td>{{ ucwords($item->kelurahan->district->regency->name) }}</td>
-                                <td>{{ ucwords($item->kelurahan->district->name) }}</td>
-                                <td>{{ ucwords($item->kelurahan->name) }}</td>
-                                <td>{{ $item->km }} KM</td>
-                                <td>
-                                    <a href="{{ route('editCity', $item->id) }}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-edit"></i> Edit
-                                    </a>
-                                    <button class="btn btn-danger btn-sm" onclick="deleteConfirmation({{ $item->id }})"><i class="fa fa-trash"></i> Hapus</button>
-                                </td>
-                            </tr>
-                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -118,13 +101,14 @@
                         data: 'id',
                         name: 'id',
                         render: function(value, param, data) {
-                            return '<div class="btn-group">' +
-                                '<a class="btn btn-sm btn-primary" href="/editCity/' + value +
-                                '"><i class="fa fa-edit"></i></a> ' +
-
-                                '<button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirmation(' +
-                                value + ')"><i class="fa fa-trash"></i></button>' +
-                                '</div> ';
+                            return `<div class="btn-group">
+                                        <a class="btn btn-sm btn-primary" href="/editCity/${value}"><i class="fa fa-edit"></i></a>
+                                        `
+                                        { @can('delete-kota') }
+                                        `
+                                        <button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirmation(${value})"><i class="fa fa-trash"></i></button>
+                                        `{ @endcan }`
+                                        </div>`;
                         },
                         orderable: false,
                     }

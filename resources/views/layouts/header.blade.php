@@ -36,11 +36,11 @@
                                     <div class="drop-heading">
                                         <div class="text-center">
                                             <h5 class="text-dark mb-0 fs-14 fw-semibold">{{ Auth::user()->name }}</h5>
-                                            <small class="text-muted">Senior Admin</small>
+                                            {{-- <small class="text-muted">Senior Admin</small> --}}
                                         </div>
                                     </div>
                                     <div class="dropdown-divider m-0"></div>
-                                    <a class="dropdown-item" href="profile.html">
+                                    {{-- <a class="dropdown-item" href="profile.html">
                                         <i class="dropdown-icon fe fe-user"></i> Profile
                                     </a>
                                     <a class="dropdown-item" href="email-inbox.html">
@@ -49,7 +49,7 @@
                                     </a>
                                     <a class="dropdown-item" href="lockscreen.html">
                                         <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-                                    </a>
+                                    </a> --}}
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
                                     </a>

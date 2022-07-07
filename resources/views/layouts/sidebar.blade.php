@@ -4,12 +4,10 @@
     <div class="app-sidebar">
         <div class="side-header">
             <a class="header-brand1" href="index.html">
-                <img src="{{ asset('/assets/images/brand/logo.png') }}" class="header-brand-img desktop-logo" alt="logo">
-                <img src="{{ asset('/assets/images/brand/logo-1.png') }}" class="header-brand-img toggle-logo"
-                    alt="logo">
-                <img src="{{ asset('/assets/images/brand/logo-2.png') }}" class="header-brand-img light-logo" alt="logo">
-                <img src="{{ asset('/assets/images/brand/logo-3.png') }}" class="header-brand-img light-logo1"
-                    alt="logo">
+                <img src="{{ asset('/assets/images/logo-depo.png') }}" class="header-brand-img desktop-logo" style="width:80px" alt="logo">
+                <img src="{{ asset('/assets/images/logo-depo.png') }}" class="header-brand-img toggle-logo" style="width:50px; height:30px" alt="logo">
+                <img src="{{ asset('/assets/images/logo-depo.png') }}" class="header-brand-img light-logo" style="width:50px; height:30px" alt="logo">
+                <img src="{{ asset('/assets/images/logo-depo.png') }}" class="header-brand-img light-logo1" style="width:80px" alt="logo">
             </a>
             <!-- LOGO -->
         </div>
@@ -27,6 +25,7 @@
                             class="side-menu__icon fe fe-home"></i><span
                             class="side-menu__label active">Dashboard</span></a>
                 </li>
+                @if (Auth::user()->hasRole('superadmin'))
                 <li class="sub-category">
                     <h3>Management</h3>
                 </li>
@@ -42,16 +41,19 @@
                         <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li> --}}
                     </ul>
                 </li>
+                @endif
+                @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('user'))
                 <li class="sub-category">
                     <h3>Data</h3>
                 </li>
-                <li class="slide @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona' || Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') is-expanded @endif">
-                    <a class="side-menu__item @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona' || Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') active @endif" data-bs-toggle="slide" href="#"><i
+                <li class="slide @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona' || Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity' || Request::segment(1) == 'users') is-expanded @endif">
+                    <a class="side-menu__item @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona' || Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity' || Request::segment(1) == 'users') active @endif" data-bs-toggle="slide" href="#"><i
                             class="side-menu__icon fe fe-box"></i><span
                             class="side-menu__label">Master Data</span><i
                             class="angle fe fe-chevron-right"></i></a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="#">Master Data</a></li>
+                        <li><a href="/users" class="slide-item @if (Request::segment(1) == 'users' || Request::segment(1) == 'createUser' || Request::segment(1) == 'editUser') active @endif"> User</a></li>
                         <li><a href="/zona" class="slide-item @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona') active @endif"> Zona</a></li>
                         <li><a href="/city" class="slide-item @if (Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') active @endif"> Kota</a></li>
                     </ul>
@@ -64,6 +66,8 @@
                             class="side-menu__icon fe fe-book"></i><span
                             class="side-menu__label active">Transaksi</span></a>
                 </li>
+                @endif
+                @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('finance'))
                 <li class="sub-category">
                     <h3>Laporan</h3>
                 </li>
@@ -79,6 +83,7 @@
                         <li><a href="{{ 'reportBulanan' }}" class="slide-item"> Laporan Bulanan</a></li>
                     </ul>
                 </li>
+                @endif
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                     width="24" height="24" viewBox="0 0 24 24">

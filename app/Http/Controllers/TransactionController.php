@@ -12,6 +12,14 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:read-transaksi|create-transaksi|update-transaksi|delete-transaksi', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-transaksi', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-transaksi', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-transaksi', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +27,7 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transaction = Transaction::whereDate('created_at','=',date('Y-m-d'))->get();
+        $transaction = Transaction::whereDate('created_at', '=', date('Y-m-d'))->get();
         // $transaction = Transaction::all();
         return view('transaction.index', compact('transaction'));
     }
@@ -30,10 +38,10 @@ class TransactionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {   
+    {
         $kelurahan = City::all();
         $provinsi = Province::all();
-        return view('transaction.create', compact('provinsi',"kelurahan"));
+        return view('transaction.create', compact('provinsi', "kelurahan"));
     }
 
     /**
@@ -45,8 +53,8 @@ class TransactionController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $city = City::where('id',$request->kelurahan)->first();
-        if($city==false){
+        $city = City::where('id', $request->kelurahan)->first();
+        if ($city == false) {
             return redirect()->route('createTransaction')->with(['error' => 'Kelurahan Belum Terdaftar!']);
         }
         $request->validate(
@@ -60,15 +68,15 @@ class TransactionController extends Controller
             ]
         );
 
-        
-        
+
+
         $input = Transaction::create([
             'nama'  =>  strtolower($request->name),
             'user_id' => Auth::user()->id,
             'no_telp' => $request->no_telp,
             'city_id' => $city->id
         ]);
-        
+
         $last = Transaction::max('id');
         foreach ($request->input('mobil') as $key => $value) {
             DetailTransaction::create([
@@ -93,7 +101,7 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        return view('transaction.cetak');
     }
 
     /**
@@ -130,12 +138,9 @@ class TransactionController extends Controller
         //
     }
 
-    public function check(Request $request){
+    public function check(Request $request)
+    {
         $p = Transaction::where('no_telp', $request->id)->first();
         return response()->json($p);
     }
-
-    
-
-    
 }

@@ -13,6 +13,14 @@ use DataTables;
 
 class CityController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:read-kota|create-kota|update-kota|delete-kota', ['only' => ['index', 'show']]);
+        $this->middleware('permission:create-kota', ['only' => ['create', 'store']]);
+        $this->middleware('permission:update-kota', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:delete-kota', ['only' => ['destroy']]);
+    }
+
     public function data()
     {
         // $data = City::join('villages', 'cities.village_id', '=', 'villages.id')
@@ -21,19 +29,19 @@ class CityController extends Controller
         $data = City::all();
         return DataTables::of($data)
             ->addIndexColumn()
-            ->addColumn('zona',function($data){
+            ->addColumn('zona', function ($data) {
                 return $data->zona->zona;
             })
-            ->addColumn('province',function($data){
+            ->addColumn('province', function ($data) {
                 return $data->kelurahan->district->regency->province->name;
             })
-            ->addColumn('regency',function($data){
+            ->addColumn('regency', function ($data) {
                 return $data->kelurahan->district->regency->name;
             })
-            ->addColumn('district',function($data){
+            ->addColumn('district', function ($data) {
                 return $data->kelurahan->district->name;
             })
-            ->addColumn('kelurahan',function($data){
+            ->addColumn('kelurahan', function ($data) {
                 return $data->kelurahan->name;
             })
             ->make(true);
@@ -224,11 +232,11 @@ class CityController extends Controller
 
     public function totalharga(Request $request)
     {
-        $city = City::where('id',$request->id)->first();
-        $total100= $city->zona->harga100*$request->total100;
-        $total50= $city->zona->harga50*$request->total50;
-        $total25= $city->zona->harga25*$request->total25;
-        $totalharga=$total100+$total50+$total25;
+        $city = City::where('id', $request->id)->first();
+        $total100 = $city->zona->harga100 * $request->total100;
+        $total50 = $city->zona->harga50 * $request->total50;
+        $total25 = $city->zona->harga25 * $request->total25;
+        $totalharga = $total100 + $total50 + $total25;
         return response()->json($totalharga);
     }
 }

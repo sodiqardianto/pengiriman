@@ -2,7 +2,6 @@
 <html lang="en" dir="ltr">
 
 <head>
-
     <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -17,7 +16,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/assets/images/brand/favicon.ico') }}" />
 
     <!-- TITLE -->
-    <title>@yield('title') – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>@yield('title') – Depo Bangunan</title>
 
 @stack('before-style')
     <!-- BOOTSTRAP CSS -->

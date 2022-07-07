@@ -52,7 +52,7 @@
                 <!-- CONTAINER OPEN -->
                 <div class="col col-login mx-auto mt-7">
                     <div class="text-center">
-                        <img src="{{ asset('/assets/images/brand/logo-white.png') }}" class="header-brand-img" alt="">
+                        <img src="{{ asset('/assets/images/logo-depo.png') }}" class="header-brand-img" style="width: 150px" alt="logo-depo">
                     </div>
                 </div>
 
