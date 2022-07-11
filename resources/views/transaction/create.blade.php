@@ -258,11 +258,10 @@
                     data: {'id':kode},
                     dataType: 'json',
                     success: function(data) {
-                        // console.log(data);
+                        
                         $('#name').val(data.nama);
                         $('#kelurahan').val(data.city_id).trigger('change');
-                        // $('#harga50').val("Rp. " + data.zona.harga50);
-                        // $('#harga100').val("Rp. " + data.zona.harga100);
+                        
                     },
                     error: function(response) {
                         toastr.error("Masukan Nomor Telepon/Nomor Telepon Belum Pernah Melakukan Transaksi");

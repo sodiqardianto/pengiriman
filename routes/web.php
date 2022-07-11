@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/deleteTransaction/{transaction}', [TransactionController::class, 'destroy'])->name('deleteTransaction');
     Route::get('/inputBarang/{barang}', [TransactionController::class, 'show'])->name('inputBarang');
     Route::get('/check', [TransactionController::class, 'check'])->name('check');
-    Route::get('/cetak/{barang}', [TransactionController::class, 'show'])->name('cetak');
+    Route::get('/cetak/{transaction}', [TransactionController::class, 'show'])->name('cetak');
 
     // Report
     Route::get('/reportHarian', [ReportController::class, 'report'])->name('reportHarian');

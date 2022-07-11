@@ -10,6 +10,7 @@ use App\Models\Village;
 use App\Models\Zona;
 use Illuminate\Http\Request;
 use DataTables;
+use Gate;
 
 class CityController extends Controller
 {
@@ -26,6 +27,7 @@ class CityController extends Controller
         // $data = City::join('villages', 'cities.village_id', '=', 'villages.id')
         //     ->join('districts', 'villages.district_id', '=', 'districts.id');
         // ->join('regencies', 'villages.regency_id', '=', 'regencies.id');
+        
         $data = City::all();
         return DataTables::of($data)
             ->addIndexColumn()
@@ -53,8 +55,9 @@ class CityController extends Controller
      */
     public function index()
     {
+        $canDelete = Gate::allows('delete-kota');
         $city = City::all();
-        return view('city.index', compact('city'));
+        return view('city.index', compact('city','canDelete'));
     }
 
     /**

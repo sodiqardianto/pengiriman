@@ -101,7 +101,8 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        return view('transaction.cetak');
+        // dd($transaction);
+        return view('transaction.cetak',compact('transaction'));
     }
 
     /**

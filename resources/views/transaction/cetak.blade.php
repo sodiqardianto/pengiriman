@@ -82,7 +82,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 text-end border-bottom border-lg-0">
-                                                <h3>Date: 12-07-2021</h3>
+                                                <h3>Date: {{ date('d-m-Y') }}</h3>
                                                 {{-- <h5>Date Issued: 12-07-2021</h5>
                                                 <h5>Due Date: 12-07-2021</h5> --}}
                                             </div>
@@ -90,21 +90,39 @@
                                         <div class="row pt-5">
                                             <div class="col-lg-6">
                                                 <p class="h3">Invoice To:</p>
-                                                <p class="fs-18 fw-semibold mb-0">Jaya</p>
+                                                <p class="fs-18 fw-semibold mb-0">{{ucwords($transaction->nama)}}</p>
                                                 <address>
-                                                    Zona 2<br>
-                                                    Kota Tangerang Selatan<br>
-                                                    Serpong Utara, Paku Jaya<br>
-                                                    +6283865836382
+                                                    {{$transaction->city->zona->zona}}<br>
+                                                    {{$transaction->city->kelurahan->district->regency->name}}<br>
+                                                    {{$transaction->city->kelurahan->district->name}}, {{$transaction->city->kelurahan->name}}<br>
+                                                    {{$transaction->no_telp}}
                                                 </address>
                                             </div>
                                             <div class="col-lg-6 text-end">
                                                 <p class="h4 fw-semibold">Details:</p>
-                                                <p class="mb-1"><b>100% Muatan:</b> Rp. 100.000,00</p>
-                                                <p class="mb-1"><b>50% Muatan:</b> Rp. 70.000,00</p>
-                                                <p class="mb-1"><b>20% Muatan:</b> Rp. 50.000,00</p>
+                                                <p class="mb-1"><b>100% Muatan:</b> Rp. {{$transaction->city->zona->harga100}}</p>
+                                                <p class="mb-1"><b>50% Muatan:</b> Rp. {{$transaction->city->zona->harga50}}</p>
+                                                <p class="mb-1"><b>20% Muatan:</b> Rp. {{$transaction->city->zona->harga25}}</p>
                                             </div>
                                         </div>
+
+                                        <?php
+                                    $muatan=0;
+                                    $biaya=0;
+                                    $surat=0;
+                                        foreach ($transaction->details as $details ) {
+                                            $muatan += $details->muatan;
+                                            if($details->muatan==25){
+                                                $biaya +=$transaction->city->zona->harga25;
+                                            }else if($details->muatan==50){
+                                                $biaya +=$transaction->city->zona->harga50;
+                                            }else{
+                                                $biaya +=$transaction->city->zona->harga100;
+                                            }
+                                            $surat++;
+                                        }
+                                        
+                                    ?>
                                         <div class="table-responsive push">
                                             <table class="table table-bordered table-hover mb-0 text-nowrap">
                                                 <tbody>
@@ -116,12 +134,12 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="text-center">1</td>
-                                                        <td>3 Mobil</td>
-                                                        <td class="text-center">175%</td>
-                                                        <td class="text-end">Rp. 220.000,00</td>
+                                                        <td>{{$surat}} Mobil</td>
+                                                        <td class="text-center">{{$muatan}}%</td>
+                                                        <td class="text-end">Rp. {{number_format($biaya)}}</td>
                                                     </tr>                                                    <tr>
                                                         <td colspan="3" class="fw-bold text-uppercase text-end">Total</td>
-                                                        <td class="fw-bold text-end h4">Rp. 220.000,00</td>
+                                                        <td class="fw-bold text-end h4">Rp. {{number_format($biaya)}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

@@ -29,8 +29,8 @@
                             <tr>
                             <th class="wd-15p border-bottom-0" width="50px">No</th>
                                 <th class="wd-15p border-bottom-0">Customer</th>
-                                <th class="wd-15p border-bottom-0">No Telpon</th>
                                 <th class="wd-15p border-bottom-0">Kelurahan</th>
+                                <th class="wd-15p border-bottom-0">No Telpon</th>
                                 <th class="wd-15p border-bottom-0">Surat Jalan</th>
                                 <th class="wd-15p border-bottom-0">Total Muatan</th>
                                 <th class="wd-15p border-bottom-0">Total Biaya</th>
@@ -89,6 +89,9 @@
 </div>
 @push('after-script')
 <script>
+
+$(document).ready(function(){
+    
     function deleteConfirmation(id, name) {
         Swal.fire({
             title: "Hapus Transaksi?",

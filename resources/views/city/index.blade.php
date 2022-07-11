@@ -50,6 +50,31 @@
         (function() {
         loadDataTable();
     })();
+
+    $(document).ready(function(){
+            
+        $('#filter').click(function(){  
+                var from_date = $('#from_date').val();
+                
+                if(from_date != '')
+                {
+                $('#responsive-datatable').DataTable().destroy();
+                loadDataTable(from_date);
+                }
+                else
+                {
+                alert('Both Date is required');
+                }
+
+            });
+
+            $('#reset').click(function(){
+                $('#from_date').val("");
+                $('#responsive-datatable').DataTable().destroy();
+                loadDataTable();
+            });
+    })
+
     function loadDataTable() {
         $(document).ready(function() {
             $('#responsive-datatable').DataTable({
@@ -103,11 +128,11 @@
                         render: function(value, param, data) {
                             return `<div class="btn-group">
                                         <a class="btn btn-sm btn-primary" href="/editCity/${value}"><i class="fa fa-edit"></i></a>
-                                        `
-                                        { @can('delete-kota') }
-                                        `
+                                        
+                                        <?php if($canDelete){ ?>
+                                        
                                         <button class="btn btn-sm btn-danger" type="button" onClick="deleteConfirmation(${value})"><i class="fa fa-trash"></i></button>
-                                        `{ @endcan }`
+                                        <?php } ?>
                                         </div>`;
                         },
                         orderable: false,
