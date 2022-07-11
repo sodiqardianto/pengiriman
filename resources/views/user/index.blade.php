@@ -44,7 +44,7 @@
                                 <td>{{ $item->no_telp }}</td>
                                 <td>{{ ucwords($item->alamat) }}</td>
                                 <td>
-                                    <a href="{{ route('editZona', $item->id) }}" class="btn btn-warning btn-sm">
+                                    <a href='/users/{{$item->id}}/edit' class="btn btn-warning btn-sm">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
                                     @can('delete-zona')
@@ -60,13 +60,13 @@
         </div>
     </div>
 </div>
-{{-- @push('after-script')
+@push('after-script')
 <script>
     function deleteConfirmation(id, name) {
         Swal.fire({
-            title: "Hapus Zona?",
+            title: "Hapus User?",
             icon: 'error',
-            text: "Apakah kamu ingin menghapus zona! ",
+            text: "Apakah kamu ingin menghapus user! ",
             showCancelButton: !0,
             confirmButtonText: "Hapus",
             cancelButtonText: "Cancel",
@@ -77,8 +77,8 @@
                 var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
                 
                 $.ajax({
-                    url: "{{url('/deleteZona')}}/" + id,
-                    type: 'POST',
+                    url: "{{url('/users')}}/" + id,
+                    type: 'DELETE',
                     data: {_token: CSRF_TOKEN},
                     dataType: 'json',
                     success: function (results) {
@@ -105,5 +105,5 @@
         }
     )}
 </script>
-@endpush --}}
+@endpush
 @endsection
