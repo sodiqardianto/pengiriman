@@ -20,6 +20,11 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'update-role']);
         Permission::create(['name' => 'delete-role']);
 
+        Permission::create(['name' => 'create-user']);
+        Permission::create(['name' => 'read-user']);
+        Permission::create(['name' => 'update-user']);
+        Permission::create(['name' => 'delete-user']);
+
         Permission::create(['name' => 'create-zona']);
         Permission::create(['name' => 'read-zona']);
         Permission::create(['name' => 'update-zona']);

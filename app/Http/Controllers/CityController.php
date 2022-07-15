@@ -54,10 +54,11 @@ class CityController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $canRead = Gate::allows('read-kota');
         $canDelete = Gate::allows('delete-kota');
         $city = City::all();
-        return view('city.index', compact('city','canDelete'));
+        return view('city.index', compact('city','canDelete','canRead'));
     }
 
     /**

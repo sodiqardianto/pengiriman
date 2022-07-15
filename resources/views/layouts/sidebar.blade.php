@@ -25,7 +25,7 @@
                             class="side-menu__icon fe fe-home"></i><span
                             class="side-menu__label active">Dashboard</span></a>
                 </li>
-                @if (Auth::user()->hasRole('superadmin'))
+                @can('read-role',Permission::class)
                 <li class="sub-category">
                     <h3>Management</h3>
                 </li>
@@ -41,8 +41,10 @@
                         <li><a href="calendar2.html" class="slide-item"> Full calendar</a></li> --}}
                     </ul>
                 </li>
-                @endif
-                @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('user'))
+                @endcan
+                <!-- if (Auth::user()->hasRole('superadmin'))
+                endif -->
+                @can(['read-zona','read-kota'],Permission::class)
                 <li class="sub-category">
                     <h3>Data</h3>
                 </li>
@@ -53,11 +55,19 @@
                             class="angle fe fe-chevron-right"></i></a>
                     <ul class="slide-menu">
                         <li class="side-menu-label1"><a href="#">Master Data</a></li>
+                        @can('read-user',Permission::class)
                         <li><a href="/users" class="slide-item @if (Request::segment(1) == 'users' || Request::segment(1) == 'createUser' || Request::segment(1) == 'editUser') active @endif"> User</a></li>
+                        @endcan
+                        @can('read-zona',Permission::class)
                         <li><a href="/zona" class="slide-item @if (Request::segment(1) == 'zona' || Request::segment(1) == 'createZona' || Request::segment(1) == 'editZona') active @endif"> Zona</a></li>
+                        @endcan
+                        @can('read-kota',Permission::class)
                         <li><a href="/city" class="slide-item @if (Request::segment(1) == 'city' || Request::segment(1) == 'createCity' || Request::segment(1) == 'editCity') active @endif"> Kota</a></li>
+                        @endcan
                     </ul>
                 </li>
+                @endcan
+                @can('read-transaksi',Permission::class)
                 <li class="sub-category">
                     <h3>Transaksi</h3>
                 </li>
@@ -66,8 +76,8 @@
                             class="side-menu__icon fe fe-book"></i><span
                             class="side-menu__label active">Transaksi</span></a>
                 </li>
-                @endif
-                @if (Auth::user()->hasRole('superadmin') || Auth::user()->hasRole('finance'))
+                @endcan
+                @can('read-laporan',Permission::class)
                 <li class="sub-category">
                     <h3>Laporan</h3>
                 </li>
@@ -83,7 +93,7 @@
                         <li><a href="{{ 'reportBulanan' }}" class="slide-item"> Laporan Bulanan</a></li>
                     </ul>
                 </li>
-                @endif
+                @endcan
             </ul>
             <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
                     width="24" height="24" viewBox="0 0 24 24">
