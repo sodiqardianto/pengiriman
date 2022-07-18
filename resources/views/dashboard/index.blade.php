@@ -28,9 +28,9 @@
                             <select class="form-control select2-show-search form-select" id="kelurahan" name="kelurahan" data-placeholder="Pilih kelurahan">
                                 <option value="" selected disabled>Pilih Kelurahan</option>
                                 @foreach ($kelurahan as $item)
-                                    <option value="{{$item->village_id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
+                                <option value="{{$item->id}}">{{ucwords($item->kelurahan->name)}} - {{ucwords($item->kelurahan->district->name)}}</option>
                                 @endforeach
-                            </select> 
+                            </select>
                         </div>
                         {{-- <div class="col-sm-12">
                             <label for="kabupaten" class="form-label">Pilih Kota/Kabupaten</label>
@@ -48,55 +48,59 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="harga25" class="form-label">25 %</label>
-                            <input type="text" class="form-control" id="harga25" name="harga25" placeholder="0" readonly>
+                            <input type="text" class="form-control" id="harga25" name="harga25" placeholder="Rp. -" readonly>
                         </div>
                         <div class="col-sm-4">
                             <label for="harga50" class="form-label">50 %</label>
-                            <input type="text" class="form-control" id="harga50" name="harga50" placeholder="0" readonly>
+                            <input type="text" class="form-control" id="harga50" name="harga50" placeholder="Rp. -" readonly>
                         </div>
                         <div class="col-sm-4">
                             <label for="harga100" class="form-label">100 %</label>
-                            <input type="text" class="form-control" id="harga100" name="harga100" placeholder="0" readonly>
+                            <input type="text" class="form-control" id="harga100" name="harga100" placeholder="Rp. -" readonly>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 
 @endsection
 
 @push('after-script')
-    <!-- INTERNAL SELECT2 JS -->
-    <script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
-    <script src="{{ asset('/assets/js/select2.js') }}"></script>
-    <script type="text/javascript">
+<!-- INTERNAL SELECT2 JS -->
+<script src="{{ asset('/assets/plugins/select2/select2.full.min.js') }}"></script>
+<script src="{{ asset('/assets/js/select2.js') }}"></script>
+<script type="text/javascript">
     $('#kelurahan').change(function() {
         var kode = $('#kelurahan').val();
         $.ajax({
             type: "GET",
             url: "{{ route('priceCity') }}",
-            data: {'id':kode},
+            data: {
+                'id': kode
+            },
             dataType: 'json',
             success: function(data) {
                 // console.log(data);
-                $('#harga25').val('RP. '+data.zona.harga25);
-                $('#harga50').val('RP. '+data.zona.harga50);
-                $('#harga100').val('RP. '+data.zona.harga100);
+                $('#harga25').val('Rp. ' + data.zona.harga25);
+                $('#harga50').val('Rp. ' + data.zona.harga50);
+                $('#harga100').val('Rp. ' + data.zona.harga100);
             },
             error: function(response) {
                 alert(response.responseJSON.message);
             }
         })
     })
-    </script>
+</script>
 
 <script>
     $(function() {
         $.ajaxSetup({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
         })
     })
 
@@ -107,7 +111,9 @@
             $.ajax({
                 url: "{{ route('getKabupaten') }}",
                 type: "POST",
-                data: {id_provinsi:id_provinsi},
+                data: {
+                    id_provinsi: id_provinsi
+                },
                 cache: false,
                 success: function(msg) {
                     $('#kabupaten').html(msg)
@@ -124,7 +130,9 @@
             $.ajax({
                 url: "{{ route('getKecamatan') }}",
                 type: "POST",
-                data: {id_kabupaten:id_kabupaten},
+                data: {
+                    id_kabupaten: id_kabupaten
+                },
                 cache: false,
                 success: function(msg) {
                     $('#kecamatan').html(msg)
@@ -141,7 +149,9 @@
             $.ajax({
                 url: "{{ route('getKelurahan') }}",
                 type: "POST",
-                data: {id_kecamatan:id_kecamatan},
+                data: {
+                    id_kecamatan: id_kecamatan
+                },
                 cache: false,
                 success: function(msg) {
                     $('#kelurahan').html(msg)
